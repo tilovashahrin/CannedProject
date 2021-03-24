@@ -10,7 +10,6 @@ Before you submit your project, modify the following table to include everyone's
 | Kashif Hussain             | KashifIV           |
 | Pulkit Madan               | PulkitMadan        |
 | Yiqing Cao                 | Sunnyc317 |
-| <first_name5> <last_name5> | <github_username5> |
 ​
 _**Note:** You can delete the unused rows from the table._
 ​
