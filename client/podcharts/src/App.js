@@ -2,7 +2,8 @@ import {BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NavBar from './components/navbar/navbar';
 
 import Home from './pages/home/home'; 
-import Account from './pages/account/account'
+import Account from './pages/account/account'; 
+import Podcast from './pages/podcast/podcast'; 
 import './App.css';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
 
       </Switch>
     </Router>
+    <Podcast/>
     </div>
   );
 }
