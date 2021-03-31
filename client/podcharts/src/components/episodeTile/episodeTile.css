@@ -1,0 +1,38 @@
+.episode-tile{
+  width: 200px; 
+  height: 120px; 
+  object-fit: cover;
+  overflow: hidden;
+  border-radius: 1rem;
+  position: relative;
+}
+
+.episode-progress {
+  height: 5px; 
+  background-color: aquamarine;
+  position: absolute;
+  bottom: 0;
+  z-index: 2;
+}
+.play-pause{
+  position: absolute; 
+  bottom: 10px; 
+  left: 5px;
+  z-index: 2;
+}
+.episode-overlay{
+  width: 100%;
+  height: 100%; 
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.episode-info{
+  position: absolute; 
+  top: 30%; 
+  text-align: center;
+  padding: .2rem; 
+  color: white; 
+  z-index: 2;
+}

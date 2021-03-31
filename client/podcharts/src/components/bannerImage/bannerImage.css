@@ -18,6 +18,7 @@
 
 .banner-text h1{
   font-size: 30pt;
+  font-weight: bold;
 }
 .banner-gradient{
   height: 40vh;
