@@ -14,6 +14,9 @@ function App() {
       <NavBar/>
 
       <Switch>
+      <Route path="/podcast">
+          <Podcast/>
+        </Route>
       <Route path="/account">
           <Account/>
         </Route>
@@ -23,7 +26,7 @@ function App() {
 
       </Switch>
     </Router>
-    <Podcast/>
+
     </div>
   );
 }
