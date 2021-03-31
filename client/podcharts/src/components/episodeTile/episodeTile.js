@@ -25,10 +25,10 @@ function EpisodeTile(props){
   }; 
 
   const getPlayPause = () => {
-    if (audio.current == null || !audio.current.paused){
-      return "./images/icons/pause-white-18dp.svg"; 
+    if (audio.current == null || audio.current.paused){
+      return "./images/icons/play_arrow-white-18dp.svg"; 
     }
-    return "./images/icons/play_arrow-white-18dp.svg"; 
+    return "./images/icons/pause-white-18dp.svg"; 
   }
 
 
