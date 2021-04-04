@@ -4,7 +4,9 @@ import BannerImage from '../../components/bannerImage/bannerImage';
 import EpisodeTile from '../../components/episodeTile/episodeTile'; 
 import TopicHeader from '../../components/topicHeader/topicHeader'; 
 import ReviewCard from '../../components/reviewCard/reviewCard'; 
+import ReviewField from '../../components/reviewField/reviewField'; 
 
+import RatingChart from './sub-components/rating-chart/ratingChart'; 
 import './podcast.css'; 
 
 // temporary data 
@@ -46,6 +48,8 @@ class Podcast extends Component{
 
         <TopicHeader text="Reviews"/>
         <div className="reviews">
+          <ReviewField/>
+          <RatingChart ratings={this.state.reviews.RatingPercentage}/>
           <ul>
             {
               this.state.reviews.items.map((item) => 

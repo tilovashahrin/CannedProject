@@ -19,12 +19,11 @@ function NavBar(props){
     {name: 'Trending', target:'/trending'}
   ]
   return(
-      <Navbar>
-        <Navbar.Menu>
-          {routes.map((item) => navItem(item))}
-        </Navbar.Menu>
-      </Navbar>
-
+    <Navbar>
+      <Navbar.Menu>
+        {routes.map((item) => navItem(item))}
+      </Navbar.Menu>
+    </Navbar>
   
   ); 
 }
