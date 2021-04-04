@@ -5,8 +5,8 @@ import {Navbar} from 'react-bulma-components';
 
 function navItem(props){
   return (
-    <Navbar.Item >
-      <Link to={props.target}>{props.name}</Link>
+    <Navbar.Item key={props.name} to={props.target}>
+      {props.name}
     </Navbar.Item>
   ); 
 }

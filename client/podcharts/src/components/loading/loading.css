@@ -1,0 +1,13 @@
+.loading{
+  margin: auto; 
+  margin-top: 30vh;
+  color: grey; 
+}
+.loading-circle{
+  margin: auto;
+  height: 300px;
+  width: 300px; 
+}
+.loading p{
+  padding: 20px; 
+}

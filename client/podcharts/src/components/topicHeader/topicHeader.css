@@ -1,0 +1,15 @@
+.topic-header{
+  padding: 3rem 5rem; 
+}
+
+.topic-header h1{
+  font-size: 23pt;
+  font-weight: bold;
+  color: black; 
+  text-align: left;
+}
+.topic-underline{
+  height: 2px; 
+  background-color: grey;
+  opacity: 0.2;
+}

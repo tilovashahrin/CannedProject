@@ -1,0 +1,17 @@
+.review-card{
+  width: 80%; 
+  margin: auto;
+  padding: 10px; 
+}
+
+.seperator{
+  height: 10px; 
+  color: grey; 
+  opacity: 0.2;
+  width: 40%; 
+}
+
+.content{ 
+  text-align: left;
+  justify-content: left;
+}
