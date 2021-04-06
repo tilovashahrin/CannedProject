@@ -6,7 +6,6 @@ import TopicHeader from '../../components/topicHeader/topicHeader';
 import ReviewCard from '../../components/reviewCard/reviewCard'; 
 import ReviewField from '../../components/reviewField/reviewField'; 
 
-import RatingChart from './sub-components/rating-chart/ratingChart'; 
 import './podcast.css'; 
 
 // temporary data 
@@ -25,6 +24,10 @@ class Podcast extends Component{
       data: podcastData, 
       reviews: reviewData 
     }); 
+  }
+
+  onCreateReview(data){
+    console.log(data); 
   }
 
   render(){
@@ -48,8 +51,7 @@ class Podcast extends Component{
 
         <TopicHeader text="Reviews"/>
         <div className="reviews">
-          <ReviewField/>
-          <RatingChart ratings={this.state.reviews.RatingPercentage}/>
+          <ReviewField author="user" callback={(data) => this.onCreateReview(data)}/>
           <ul>
             {
               this.state.reviews.items.map((item) => 
