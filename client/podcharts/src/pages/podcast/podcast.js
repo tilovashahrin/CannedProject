@@ -4,6 +4,7 @@ import BannerImage from '../../components/bannerImage/bannerImage';
 import EpisodeTile from '../../components/episodeTile/episodeTile'; 
 import TopicHeader from '../../components/topicHeader/topicHeader'; 
 import ReviewCard from '../../components/reviewCard/reviewCard'; 
+import ReviewField from '../../components/reviewField/reviewField'; 
 
 import './podcast.css'; 
 
@@ -23,6 +24,10 @@ class Podcast extends Component{
       data: podcastData, 
       reviews: reviewData 
     }); 
+  }
+
+  onCreateReview(data){
+    console.log(data); 
   }
 
   render(){
@@ -46,6 +51,7 @@ class Podcast extends Component{
 
         <TopicHeader text="Reviews"/>
         <div className="reviews">
+          <ReviewField author="user" callback={(data) => this.onCreateReview(data)}/>
           <ul>
             {
               this.state.reviews.items.map((item) => 
