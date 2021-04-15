@@ -18,7 +18,6 @@ function PodcastListItem(props){
       return ""; 
     }
     else{
-      console.log(podcastData); 
       return podcastData.episodes.items[0]['images'][0]['url']; 
     }
   }
