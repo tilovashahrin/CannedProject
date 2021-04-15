@@ -19,7 +19,9 @@ class Podcast extends Component{
   }
 
   componentDidMount(){
-    console.log(podcastData); 
+    if (this.props.location){
+      //fetch podcast from props.location.state.podcastID
+    }
     this.setState({
       data: podcastData, 
       reviews: reviewData 

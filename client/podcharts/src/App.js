@@ -4,14 +4,15 @@ import NavBar from './components/navbar/navbar';
 import Home from './pages/home/home'; 
 import Account from './pages/account/account'; 
 import Podcast from './pages/podcast/podcast'; 
+import Search from './pages/search/search'; 
 import './App.css';
 
-function App() {
+function App(props) {
   return (
     <div className="App">
 
     <Router>
-      <NavBar/>
+      <NavBar location={props.location}/>
 
       <Switch>
       <Route path="/podcast">
@@ -19,10 +20,14 @@ function App() {
         </Route>
       <Route path="/account">
           <Account/>
-        </Route>
-        <Route path="/">
-          <Home/>
-        </Route>
+      </Route>
+      <Route path="/search" component={Search}/>
+      <Route path="/home">
+        <Home/>
+      </Route>
+      <Route path="/">
+        <Home/>
+      </Route>
 
       </Switch>
     </Router>
