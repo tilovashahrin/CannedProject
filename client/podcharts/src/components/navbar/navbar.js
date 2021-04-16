@@ -19,9 +19,9 @@ function navItem(props){
 function NavBar(props){
   const routes = [
     {name: 'Home', target:'/'}, 
+    {name: 'Following', target:'/following'},
     {name: 'Account', target:'/account'}, 
-    {name: 'Sign Up', target:'/signup'}, 
-    {name: 'Trending', target:'/trending'}
+    {name: 'Sign Up', target:'/signup'}
   ]; 
   const history = useHistory(); 
 
@@ -47,7 +47,6 @@ function NavBar(props){
               onKeyDown={onEnterSearch}
               ></Input>
     </Navbar>
-  
   ); 
 }
 
