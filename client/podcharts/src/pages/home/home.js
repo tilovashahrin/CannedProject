@@ -1,10 +1,11 @@
+
 // export default (props) => <p>Hello World</p>
 
 import React, { Component, useState } from 'react';
 import Loading from '../../components/loading/loading';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import Rankcard from '../../components/rankcard/rankcard';
-import Ranking from '../../components/ranking/ranking'
+import TopicHeader from '../../components/topicHeader/topicHeader'; 
 
 import podcastData from './tempPodcastData.json';
 import './home.css';
@@ -51,6 +52,11 @@ class Home extends Component {
                         <li><a href="#" onClick={() => onClickItem("Show")}>Show</a></li>
                     </ul>
                 </nav>
+          
+                <div>
+                    <TopicHeader text='Top Trending:'/>
+                    <TopicHeader text='Your Recent Reviews: '/>
+                </div>
 
                 {/* <Ranking category={'Comedy'} data={this.state.data}/> */}
                 <section>
@@ -89,3 +95,4 @@ class Home extends Component {
 
 
 export default Home;
+
