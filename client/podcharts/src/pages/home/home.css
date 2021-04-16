@@ -6,3 +6,6 @@
 #ranktitle p {
     color:white;
 }
+.breadcrumb li {
+    margin: 1rem;
+}
