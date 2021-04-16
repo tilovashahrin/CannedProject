@@ -1,9 +1,10 @@
 // export default (props) => <p>Hello World</p>
 
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import Loading from '../../components/loading/loading';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import Rankcard from '../../components/rankcard/rankcard';
+import Ranking from '../../components/ranking/ranking'
 
 import podcastData from './tempPodcastData.json';
 import './home.css';
@@ -11,17 +12,28 @@ import './home.css';
 class Home extends Component {
     constructor(props) {
         super();
-        this.state = { data: null };
+        this.state = { data: null, category: 'Comedy'};
+        // this.state = { category: 'Comedy'}
     }
 
     componentDidMount() {
-        console.log(podcastData);
+        // console.log(podcastData);
         this.setState({
-            data: podcastData,
+            data: podcastData, 
         });
     }
 
     render() {
+        // const [category, setCategory] = useState('Comedy');
+
+        const onClickItem = (c) => {
+            // console.log(c)
+            // setCategory(c)
+            this.setState({
+                category: c, 
+            });
+        }
+
 
         if (this.state.data == null) {
             return <Loading />
@@ -29,35 +41,45 @@ class Home extends Component {
         else {
             // need to take a rank-sorted list of podcast 
             let rank = 0;
-            return <div className="home-page section has-text-left p-0 m-0">
-                <section className="hero" id="ranktitle">
-                    <div className="hero-body">
-                        <p className="title">
-                            Rankings
-                        </p>
-                        <p className="subtitle">
-                            Category: Comedy
-                        </p>
-                    </div>
-                </section>
-                <div className="container section p-0 m-0">
+            return <div className="home-page has-text-left p-0 m-0">
+
+                <nav className="breadcrumb has-bullet-separator is-centered" aria-label="breadcrumbs">
                     <ul>
-                        {
-                            this.state.data.map(function (value) {
-                                console.log(value)
-                                rank += 1;
-                                return (<li key={value.uri}>
-                                    <div class="section">
-                                        {/* <Rankcard image={value.episodes.items[0]['images'][0]['url']} title={value.name} description={value.description} creator={value.publisher} rating={8} ranking={rank} /> */}
-                                        <Rankcard value={value} rank={rank} />
-                                    </div>
-                                </li>
-                                )
-                            })
-                        }
+                        <li><a href="#" onClick={() => onClickItem("Comedy")}>Comedy</a></li>
+                        <li><a href="#" onClick={() => onClickItem("Sports")}>Sports</a></li>
+                        <li><a href="#" onClick={() => onClickItem("News")}>News</a></li>
+                        <li><a href="#" onClick={() => onClickItem("Show")}>Show</a></li>
                     </ul>
-                    {/* <Rankcard image={this.state.data.episodes.items[0]['images'][0]['url']} title={this.state.data.name} description={this.state.data.description} creator={this.state.data.publisher} rating={8} ranking={1} /> */}
-                </div>
+                </nav>
+
+                {/* <Ranking category={'Comedy'} data={this.state.data}/> */}
+                <section>
+                    <section className="hero" id="ranktitle">
+                        <div className="hero-body">
+                            <p className="title">
+                                Rankings
+                        </p>
+                            <p className="subtitle">
+                                Category: {this.state.category}
+                        </p>
+                        </div>
+                    </section>
+
+                    <section className="section">
+                        <ul>
+                            {
+                                this.state.data.map(function (value) {
+                                    rank += 1;
+                                    return (<li key={value.uri}>
+                                        <Rankcard value={value} rank={rank} />
+                                        <div className="m-1"></div>
+                                    </li>
+                                    )
+                                })
+                            }
+                        </ul>
+                    </section>
+                </section>
             </div>
         }
     }

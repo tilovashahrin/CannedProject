@@ -1,6 +1,6 @@
 .hero {
     background-color: rgba(38, 9, 201, 0.795);
-    border-radius: 10px;
+    /* border-radius:  0px 0px  10px 10px; */
 }
 
 #ranktitle p {
