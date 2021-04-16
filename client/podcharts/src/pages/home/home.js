@@ -27,7 +27,7 @@ class Home extends Component {
         }
         else {
             return <div className="home-page section">
-                <section className="hero">
+                <section className="hero" id="ranktitle">
                     <div className="hero-body">
                         <p className="title">
                             Rankings

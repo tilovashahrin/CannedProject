@@ -3,6 +3,6 @@
     border-radius: 10px;
 }
 
-.title, .subtitle {
+#ranktitle p {
     color:white;
 }

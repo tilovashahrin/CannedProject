@@ -23,10 +23,12 @@ function Rankcard(props) {
                     <Media.Item renderAs="figure" position="left">
                         <Image src={image} size={64} />
                     </Media.Item>
+
                     <Media.Item>
                         <Heading size={4}>{title}</Heading>
                         <Heading subtitle size={6}>By {creator}</Heading>
                     </Media.Item>
+                    
                     <Media.Item position="right">
                         {/* <Image src={image} size={64} /> */}
                         <div className="content">
