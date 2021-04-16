@@ -1,4 +1,4 @@
-{
+[{
   "available_markets" : [ "AD", "AR", "AT", "AU", "BE", "BG", "BO", "BR", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "EC", "EE", "ES", "FI", "FR", "GB", "GR", "GT", "HK", "HN", "HU", "ID", "IE", "IL", "IS", "IT", "JP", "LI", "LT", "LU", "LV", "MC", "MT", "MX", "MY", "NI", "NL", "NO", "NZ", "PA", "PE", "PH", "PL", "PT", "PY", "RO", "SE", "SG", "SK", "SV", "TH", "TR", "TW", "US", "UY", "VN", "ZA" ],
   "copyrights" : [ ],
   "description" : "Vi är där historien är. Ansvarig utgivare: Nina Glans",
@@ -98,4 +98,109 @@
   "publisher" : "Sveriges Radio",
   "type" : "show",
   "uri" : "spotify:show:38bS44xjbVVZ3No3ByF1dJ"
+}, 
+{
+  "available_markets" : [ "AD", "AR", "AT", "AU", "BE", "BG", "BO", "BR", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "EC", "EE", "ES", "FI", "FR", "GB", "GR", "GT", "HK", "HN", "HU", "ID", "IE", "IL", "IS", "IT", "JP", "LI", "LT", "LU", "LV", "MC", "MT", "MX", "MY", "NI", "NL", "NO", "NZ", "PA", "PE", "PH", "PL", "PT", "PY", "RO", "SE", "SG", "SK", "SV", "TH", "TR", "TW", "US", "UY", "VN", "ZA" ],
+  "copyrights" : [ ],
+  "description" : "Vi är där historien är. Ansvarig utgivare: Nina Glans",
+  "episodes" : {
+    "href" : "https://api.spotify.com/v1/shows/38bS44xjbVVZ3No3ByF1dJ/episodes?offset=0&limit=50",
+    "items" : [ {
+      "audio_preview_url" : "https://p.scdn.co/mp3-preview/7a785904a33e34b0b2bd382c82fca16be7060c36",
+      "description" : "Hör Tobias Svanelid och hans bok- och spelpaneler tipsa om de bästa historiska böckerna och spelen att njuta av i sommar!  Hör Vetenskapsradion Historias Tobias Svanelid tipsa tillsammans med Kristina Ekero Eriksson och Urban Björstadius om de bästa böckerna att ta med till hängmattan i sommar. Något för alla utlovas  såsom stormande 1700-talskärlek, seglivade småfolk och kvinnliga bågskyttar under korstågen. Dessutom tipsas om två historiska brädspel, där spelarna i det ena förflyttas till medeltidens Orléans, i det andra ska överleva på Robinson Kruses öde ö, bland annat genom att tillaga tigerstek! De böcker som nämns i programmet är: Völvor, krigare och vanligt folk av Kent Andersson Kvinnliga krigare av Stefan Högberg De små folkens historia av Ingmar Karlsson Jugoslaviens undergång av Sanimir Resic Venedig: En vägvisare i tid och rum av Carin Norberg och Carl Tham Samlare, jägare och andra fågelskådare av Susanne Nylund Skog Ebba Hochschild: Att leva efter döden av Caroline Ranby 68 av Henrik Berggren Förnuft eller känsla av Brita Planck Finanskrascher av Lars Magnusson   Spelen som testas är: Orléans av Reiner Stockhausen Robinson Crusoe - Adventures on the Cursed Island av Ignazy Trzewiczek",
+      "duration_ms" : 2677448,
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/episode/4d237GqKH4NP1jtgwy6bP3"
+      },
+      "href" : "https://api.spotify.com/v1/episodes/4d237GqKH4NP1jtgwy6bP3",
+      "id" : "4d237GqKH4NP1jtgwy6bP3",
+      "images" : [ {
+        "height" : 640,
+        "url" : "data:image/png;base64,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",
+        "width" : 640
+      }, {
+        "height" : 300,
+        "url" : "https://i.scdn.co/image/245062bc785bb8672cd002cb96b518a4f50e9067",
+        "width" : 300
+      }, {
+        "height" : 64,
+        "url" : "https://i.scdn.co/image/cc0797a99e21733caf0f4e23685a173033fdaa49",
+        "width" : 64
+      } ],
+      "is_externally_hosted" : false,
+      "language" : "sv",
+      "name" : "Pyttefolk och tigerstekar i hängmattan",
+      "release_date" : "2018-06-19",
+      "release_date_precision" : "day",
+      "type" : "episode",
+      "uri" : "spotify:episode:4d237GqKH4NP1jtgwy6bP3"
+    }, 
+    
+    
+    {
+      "audio_preview_url" : "https://p.scdn.co/mp3-preview/99180ec43a984c61b079bd3e71443a1886d0290c",
+      "description" : "Some podcast description",
+      "duration_ms" : 2666659,
+      "explicit" : false,
+      "external_urls" : {
+        "spotify" : "https://open.spotify.com/episode/4nLBHCqEvCcRyWImnKo009"
+      },
+      "href" : "https://api.spotify.com/v1/episodes/4nLBHCqEvCcRyWImnKo009",
+      "id" : "4nLBHCqEvCcRyWImnKo009",
+      "images" : [ {
+        "height" : 640,
+        "url" : "https://i.scdn.co/image/80a842ffc3d0c5fc1ec69e3e4987a99052454f26",
+        "width" : 640
+      }, {
+        "height" : 300,
+        "url" : "https://i.scdn.co/image/3a2ca33937fcef64124f492b6bd67d3583f1278e",
+        "width" : 300
+      }, {
+        "height" : 64,
+        "url" : "https://i.scdn.co/image/fe428e98ad84732dff1ea73ae7f3fae5110e658c",
+        "width" : 64
+      } ],
+      "is_externally_hosted" : false,
+      "is_playable" : true,
+      "language" : "sv",
+      "languages" : [ "sv" ],
+      "name" : "Bronsåldersstadens kollaps",
+      "release_date" : "2018-06-12",
+      "release_date_precision" : "day",
+      "type" : "episode",
+      "uri" : "spotify:episode:4nLBHCqEvCcRyWImnKo009"
+    }],
+    "limit" : 50,
+    "next" : "https://api.spotify.com/v1/shows/38bS44xjbVVZ3No3ByF1dJ/episodes?offset=50&limit=50",
+    "offset" : 0,
+    "previous" : null,
+    "total" : 520
+  },
+  "explicit" : false,
+  "external_urls" : {
+    "spotify" : "https://open.spotify.com/show/38bS44xjbVVZ3No3ByF1dJ"
+  },
+  "href" : "https://api.spotify.com/v1/shows/38bS44xjbVVZ3No3ByF1dJ",
+  "id" : "38bS44xjbVVZ3No3ByF1dJ",
+  "images" : [ {
+    "height" : 640,
+    "url" : "https://i.scdn.co/image/3c59a8b611000c8b10c8013013c3783dfb87a3bc",
+    "width" : 640
+  }, {
+    "height" : 300,
+    "url" : "https://i.scdn.co/image/2d70c06ac70d8c6144c94cabf7f4abcf85c4b7e4",
+    "width" : 300
+  }, {
+    "height" : 64,
+    "url" : "https://i.scdn.co/image/3dc007829bc0663c24089e46743a9f4ae15e65f8",
+    "width" : 64
+  } ],
+  "is_externally_hosted" : false,
+  "languages" : [ "sv" ],
+  "media_type" : "audio",
+  "name" : "Second rank podcast!",
+  "publisher" : "Sveriges Radio",
+  "type" : "show",
+  "uri" : "spotify:show:2VRS1IJCTn2Nlkg33ZVfkM"
 }
+]
