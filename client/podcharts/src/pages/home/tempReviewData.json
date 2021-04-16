@@ -1,0 +1,19 @@
+{
+  "RatingPercentage": [0.6, 0.2, 0.05, 0.25], 
+  "items": [
+    {
+      "author": "Kashif Hussain", 
+      "rating": 5, 
+      "title": "Pretty Good", 
+      "content": "Very cool would like to see more.", 
+      "id": "38420342349"
+    }, 
+    {
+      "author": "Not Kashif", 
+      "rating": 3, 
+      "title": "Kinda Mid", 
+      "content": "Not very cool would not like to see more.", 
+      "id": "38420342349"
+    }
+  ]
+}

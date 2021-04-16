@@ -1,0 +1,14 @@
+#cardItem {
+    border-radius: 20px;
+}
+
+#rank {
+    border-radius: 20px 0px 0px 20px;
+    background-color: blueviolet;
+}
+
+#rank h1 {
+    color: white;
+
+}
+

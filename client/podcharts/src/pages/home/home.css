@@ -1,0 +1,8 @@
+.hero {
+    background-color: blueviolet;
+    border-radius: 10px;
+}
+
+.title, .subtitle {
+    color:white;
+}
