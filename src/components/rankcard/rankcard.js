@@ -23,14 +23,35 @@ function Rankcard(props) {
         history.push({ pathname: '/podcast', state: { podcastID: id } });
     }
 
+    const displaystars = (rating) => {
+        const whitestar = "./images/icons/star_rate_white_24dp.svg";
+        const blackstar = "./images/icons/star_rate_black_24dp.svg";
+
+        var stars = []
+        for (let i = 1; i < 6; i++) {
+            if (i < rating) {
+                stars.push(true)
+            } else {
+                stars.push(false)
+            }
+        }
+
+        return <div className="stars content">
+            {stars.map((value, index) =>
+                <img src={(value) ? blackstar : whitestar} />
+            )}
+        </div>
+    }
+
     return (
         <Card id="cardItem" className="columns container ">
-            {/* <Card.Image src={image} size="2by3" className="column is-2"/> */}
+
             <Card.Content className="column is-2 " id="rank">
                 <div id="rankBox" className="content">
                     <h1>Rank #{ranking} </h1>
                 </div>
             </Card.Content>
+
             <Card.Content className="column is-8" onClick={onClickItem}>
                 <Media>
                     <Media.Item renderAs="figure" position="left">
@@ -43,9 +64,9 @@ function Rankcard(props) {
                     </Media.Item>
 
                     <Media.Item position="right">
-                        {/* <Image src={image} size={64} /> */}
                         <div className="content">
                             <h2>Rating {rating} / 5</h2>
+                            {displaystars(rating)}
                         </div>
                     </Media.Item>
                 </Media>
@@ -57,6 +78,7 @@ function Rankcard(props) {
                     </p>
                 </Content>
             </Card.Content>
+
         </Card>
     );
 }
