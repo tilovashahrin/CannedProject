@@ -1,4 +1,4 @@
-import {BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import NavBar from './components/navbar/navbar';
 
 import Home from './pages/home/home'; 
@@ -31,8 +31,8 @@ function App(props) {
         <Home/>
       </Route>
 
-      </Switch>
-    </Router>
+        </Switch>
+      </Router>
 
     </div>
   );
