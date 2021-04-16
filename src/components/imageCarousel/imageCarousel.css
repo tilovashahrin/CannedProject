@@ -1,0 +1,41 @@
+
+.image-carousel{
+  position: relative;
+  top: 0; 
+  height: 30vh; 
+  width: 100%; 
+}
+
+.carousel-images{
+  position: absolute;
+  top: 0; 
+  left: 0; 
+  height: 30vh; 
+  width: 100%; 
+  object-fit: cover;
+  overflow: hidden;
+  z-index: -1;
+}
+
+.selectors{
+  position: absolute;
+  bottom: 0;
+  left: 50%; 
+  display: flex;
+
+}
+
+.circle{
+  height: 1rem;
+  width: 1rem;
+  justify-content: center;
+  margin: .2rem 1rem;
+  border-radius: 50%;
+  border: 1px solid grey; 
+  background-color: white;
+  z-index: 100;
+}
+
+.selected{
+  background-color: lightblue;
+}
