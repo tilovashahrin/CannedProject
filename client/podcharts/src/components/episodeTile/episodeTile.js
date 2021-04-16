@@ -34,12 +34,12 @@ function EpisodeTile(props){
 
   return <div className="episode-tile" key={episode.uri}>
     <div className="episode-progress" style={{ width: `${audioCompletion*100}%` }}></div>
-    <img src={getPlayPause()}className="play-pause" onClick={() => onHandleAudio()}></img>
+    <img src={getPlayPause()}className="play-pause" onClick={() => onHandleAudio()} alt="Play/Pause Preview"></img>
     <div className="episode-info">
       <h1>{episode.name}</h1>
     </div>
     <div className="episode-overlay"></div>
-    <img src={episode.images[1].url}></img>
+    <img src={episode.images[1].url} alt="Podcast Image"></img>
     
   </div>
 }

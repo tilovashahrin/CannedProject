@@ -1,0 +1,22 @@
+.account-page{
+  margin: 1rem; 
+}
+
+.account-page h2 {
+  font-size: 10vw;
+  display: inline-block;
+  padding-right: 2rem;
+  color: black; 
+}
+.account-welcome{
+  opacity: 0.3;
+}
+.account-back{
+  opacity: 0.6;
+}
+.bar{
+  height: 5px; 
+  width: 80%; 
+  background-color: navy;
+  margin: auto;
+}

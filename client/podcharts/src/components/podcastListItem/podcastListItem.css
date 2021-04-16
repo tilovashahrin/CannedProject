@@ -1,0 +1,43 @@
+.episode-list-item{
+  width: 80%; 
+  border: 2px solid grey;
+  border-radius: 1rem;
+  height: 5rem;
+  overflow: hidden;
+  margin: 0 5% 1rem 5%;
+  position: relative;
+}
+
+.episode-list-item h4{
+  font-size: 20pt;
+  color: white; 
+  left: 2rem; 
+  text-align: left;
+  z-index: 2;
+  padding: 0 2rem ;
+}
+.episode-list-item p{
+  color: white; 
+  left: 2rem; 
+  text-align: left;
+  z-index: 2;
+  padding: 0 2rem ;
+}
+
+.episode-list-item img{
+  position: absolute;
+  object-fit: cover;
+  width: 100%;
+  z-index: -2;
+  transform: translate(-50%, -50%); 
+}
+.episode-list-gradient{
+  position: absolute;
+  width: 80%; 
+  height: 5rem;
+  top: 0;
+  left: 0; 
+  background: linear-gradient(90deg, black 0%, transparent 100%); 
+  background-size: cover; 
+  z-index: -1;
+}
