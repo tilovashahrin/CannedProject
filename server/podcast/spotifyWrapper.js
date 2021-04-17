@@ -1,5 +1,6 @@
 const axios = require('axios'); 
 const secrets = require('../secrets.json'); 
+const { Key } = require('sshpk');
 
 const spotify_id = secrets.spotify.id; 
 const spotify_secret = secrets.spotify.secret; 
@@ -21,25 +22,43 @@ async function getAuthorization(){
 
 
 async function KeyWrapper(operation){
-  const res = operation(); 
+  let res = await operation(); 
   if (res){
     return res; 
   } 
   await getAuthorization(); 
-  return await operation(); 
+  return await operation() 
 }
 
 async function getShow(id){
-  return await axios.get(wire + id, {headers:{"Authorization": "Bearer " + token}}); 
+  let response = false; 
+  await axios.get(wire + 'shows/?market=US&ids=' + id, {headers:{"Authorization": "Bearer " + token}})
+  .then((res) => response = res, 
+        (error) => {response = false;}); 
+  return response; 
 }
+
+async function getEpisodes(id){
+  let response = false; 
+  await axios.get(wire + 'shows/' + id + '/episodes?market=US', {headers:{"Authorization": "Bearer " + token}})
+  .then((res) => response = res, 
+        (error) => {response = false;}); 
+  return response; 
+}
+
 async function searchShow(query){
   const q = query.replace(/\s/g, '%20'); 
   let response = false; 
   console.log(q);
-  axios.get(`${wire}search?q=${q}&type=show&market=US`, {headers:{"Authorization": "Bearer " + token}})
+  await axios.get(`${wire}search?q=${q}&type=show&market=US`, {headers:{"Authorization": "Bearer " + token}})
   .then((res) => response = res, 
-        (error) => {console.log(error); response = false;}); 
+        (error) => {response = false;}); 
   return response; 
 }
 
-KeyWrapper(() => searchShow('Joe Rogan')).then(e => console.log(e)); 
+module.exports = {
+  getShow: (id) => KeyWrapper(() => getShow(id)), 
+  getEpisodes: (id) => KeyWrapper(() => getEpisodes(id)),
+  searchShow: (query) => KeyWrapper(() => searchShow(query))
+
+};
