@@ -3,9 +3,7 @@ import 'react-bulma-components/dist/react-bulma-components.min.css';
 import { Card, Media, Content, Heading, Image, Section, Container } from 'react-bulma-components';
 import "./trendingItem.css"
 import { useHistory } from 'react-router-dom';
-
-import EpisodeTile from '../../components/episodeTile/episodeTile';
-import BannerImage from '../../components/bannerImage/bannerImage';
+import {motion, useAnimation} from 'framer-motion'; 
 
 function TrendingItem(props) {
   // const { title, image, description, rating, creator } = props
