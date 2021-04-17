@@ -1,9 +1,7 @@
 import React, {Component} from 'react'; 
 import TopicHeader from '../../components/topicHeader/topicHeader'; 
 import PodcastListitem from '../../components/podcastListItem/podcastListItem'; 
-import Loading from '../../components/loading/loading'; 
-//temp data
-import tempData from './searchResults.json'; 
+import Loading from '../../components/loading/loading';
 
 import './search.css';
 
@@ -16,18 +14,21 @@ class Search extends Component{
     super(props); 
     let searchQuery = ''; 
     if (props.location){
-      searchQuery= props.location.state.query; 
+      searchQuery= props.location.state.query;
     }
     this.state = {query: searchQuery}; 
   }
 
   componentDidMount(){
     if (this.state.query !== ''){
-      
+      fetch(`http://localhost:8080/podcasts/search/${this.state.query}`)
+      .then(response => response.json())
+      .then((data) => {
+        this.setState({
+          data: data
+        }); 
+      })
     }
-    this.setState({
-      data: tempData
-    }); 
   }
 
   displayResults(){

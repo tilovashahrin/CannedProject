@@ -8,24 +8,29 @@ import ReviewField from '../../components/reviewField/reviewField';
 
 import './podcast.css'; 
 
-// temporary data 
-import podcastData from './tempPodcastData.json';
-import reviewData from './tempReviewData.json'; 
 class Podcast extends Component{
   constructor(props){
-    super(); 
-    this.props = props; 
-    this.state = {data: null}; 
+    super(props); 
+    this.state = {data: null, reviews:null}; 
   }
 
   componentDidMount(){
     if (this.props.location){
-      //fetch podcast from props.location.state.podcastID
+      fetch(`http://localhost:8080/podcasts/${this.props.location.state.podcastID}`)
+      .then(response => response.json())
+      .then((data)=>{
+        this.setState({
+          data: data, 
+        }); 
+      })
+      fetch(`http://localhost:8080/podcasts/${this.props.location.state.podcastID}/reviews`)
+      .then(response => response.json())
+      .then((data)=>{
+        this.setState({
+          reviews: data, 
+        }); 
+      })
     }
-    this.setState({
-      data: podcastData, 
-      reviews: reviewData 
-    }); 
   }
 
   onCreateReview(data){
@@ -33,7 +38,7 @@ class Podcast extends Component{
   }
 
   render(){
-    if (this.state.data == null){
+    if (this.state.data == null || this.state.reviews == null ){
       return <Loading/>
     }
     else{
