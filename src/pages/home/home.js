@@ -7,7 +7,6 @@ import 'react-bulma-components/dist/react-bulma-components.min.css';
 import Rankcard from '../../components/rankcard/rankcard';
 import TopicHeader from '../../components/topicHeader/topicHeader';
 import ImageCarousel from '../../components/imageCarousel/imageCarousel';
-import podcastData from './tempPodcastData.json';
 import './home.css';
 
 class Home extends Component {
@@ -18,10 +17,14 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    // console.log(podcastData);
-    this.setState({
-      data: podcastData,
-    });
+    fetch(`http://localhost:8080/trending`)
+    .then(response => response.json())
+    .then((data)=>{
+      console.log(data); 
+      this.setState({
+        data: data,
+      });
+    }); 
   }
 
   render() {

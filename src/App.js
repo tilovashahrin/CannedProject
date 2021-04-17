@@ -16,12 +16,8 @@ function App(props) {
       <NavBar location={props.location}/>
 
       <Switch>
-      <Route path="/podcast">
-          <Podcast/>
-        </Route>
-      <Route path="/account">
-          <Account/>
-      </Route>
+      <Route path="/podcast" component={Podcast}/>
+      <Route path="/account" component={Account}/>
       <Route path="/search" component={Search}/>
       <Route path='/signup' component={SignUp}/>
       <Route path="/home">
