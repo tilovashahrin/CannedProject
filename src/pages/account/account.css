@@ -3,7 +3,7 @@
 }
 
 .account-page h2 {
-  font-size: 10vw;
+  font-size: 5vw;
   display: inline-block;
   padding-right: 2rem;
   color: black; 
@@ -19,4 +19,14 @@
   width: 80%; 
   background-color: navy;
   margin: auto;
+}
+
+.acc{
+  padding-bottom: 2rem;
+  text-align: left;
+  padding-left: 5%;
+} 
+
+#account-name, #account-email, #account-id{
+  font-size: 30px;
 }
