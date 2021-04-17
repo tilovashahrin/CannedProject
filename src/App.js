@@ -5,7 +5,7 @@ import Home from './pages/home/home';
 import Account from './pages/account/account'; 
 import Podcast from './pages/podcast/podcast'; 
 import Search from './pages/search/search'; 
-import SignUp from './pages/signUp/signup'; 
+import SignUp from './pages/signUp/signUp'; 
 import './App.css';
 
 function App(props) {

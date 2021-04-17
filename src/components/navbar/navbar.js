@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory, Link } from "react-router-dom";
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import { Navbar, Form } from 'react-bulma-components';
+import Login from '../../components/login/login';
 
 import './navbar.css';
 const { Input } = Form;
@@ -20,12 +21,12 @@ function NavBar(props) {
   const routes = [
     { name: 'Home', target: '/' },
     { name: 'Account', target: '/account' },
-    { name: 'Sign Up', target: '/signup' },
     { name: 'Trending', target: '/trending' }
   ];
   const history = useHistory();
 
   var [searchQuery, setSearchQuery] = useState('');
+  var [showLogin, setLogin] = useState(false); 
   const onEnterSearch = (e) => {
     if (e.key === 'Enter') {
       if (searchQuery !== '') {
@@ -53,6 +54,12 @@ function NavBar(props) {
         value={searchQuery}
         onKeyDown={onEnterSearch}
       ></Input>
+      <Navbar.Item className={showLogin? "is-outlined": ""} randerAs="a" href="#" onClick={() => setLogin(!showLogin)}>
+          <Link>
+            Log in / Register
+          </Link>
+        </Navbar.Item>
+      {(showLogin)? <Login removePannel={() => setLogin(false)}/>: null}
     </Navbar>
 
   );
