@@ -4,8 +4,8 @@ import TopicHeader from '../../components/topicHeader/topicHeader';
 import PodcastListItem from '../../components/podcastListItem/podcastListItem'; 
 import ActivityChart from '../../components/activityChart/activityChart'; 
 import './account.css'; 
-//Temporarily data
-import tempAccountData from './tempAccountData.json'; 
+
+
 
 class Account extends Component{
   constructor(props){
@@ -14,9 +14,13 @@ class Account extends Component{
   }
 
   componentDidMount(){
-    this.setState({
-      data: tempAccountData
-    }); 
+    fetch('http://localhost:8080/account/')
+    .then(response => response.json())
+    .then((data) => {
+      this.setState({
+        data: data
+      }); 
+    })
   }
 
   render(){

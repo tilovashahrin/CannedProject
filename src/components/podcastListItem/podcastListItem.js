@@ -2,7 +2,6 @@ import React, {useState, useEffect} from 'react';
 import {useHistory} from 'react-router-dom'; 
 import './podcastListItem.css'; 
 //Temp podcast data 
-import data from './tempPodcastData.json'; 
 
 function PodcastListItem(props){
   const {podcastID} = props; 
@@ -11,8 +10,12 @@ function PodcastListItem(props){
   let [podcastData, setPodcastData] = useState({}); 
 
   useEffect(() => {
-    // fetch podcast using podcastID 
-    setPodcastData(data); 
+    fetch(`http://localhost:8080/podcasts/${podcastID}`)
+    .then(response => response.json())
+    .then((data)=>{
+      console.log(data); 
+      setPodcastData(data.shows[0]); 
+    }); 
   }, [])
 
   const getImage = () => {
@@ -20,7 +23,7 @@ function PodcastListItem(props){
       return ""; 
     }
     else{
-      return podcastData.episodes.items[0]['images'][0]['url']; 
+      return podcastData['images'][0]['url']; 
     }
   }
 

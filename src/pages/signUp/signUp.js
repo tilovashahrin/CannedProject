@@ -26,28 +26,12 @@ class SignUp extends Component{
     }
   }
 
-  updateEmail(e){
+  updateField(e){
     if (e.target.value){
-      this.setState({email: e.target.value}); 
+      this.setState({[e.target.name]: e.target.value}); 
     }
     else{
-      this.setState({email: ''}); 
-    }
-  }
-  updatePassword(e){
-    if (e.target.value){
-      this.setState({password: e.target.value}); 
-    }
-    else{
-      this.setState({password: ''}); 
-    }
-  }
-  updateVerifyPassword(e){
-    if (e.target.value){
-      this.setState({verifyPassword: e.target.value}); 
-    }
-    else{
-      this.setState({verifyPassword: ''}); 
+      this.setState({[e.target.name]: ''}); 
     }
   }
 
@@ -104,14 +88,24 @@ class SignUp extends Component{
           <Label>
             Username: 
           </Label>
-          <Input placeholder='Joe Shmoe' onChange={(e) => this.updatUsername(e)} value={this.state.username}></Input>    
+          <Input 
+            placeholder='Joe Shmoe'
+            name='username' 
+            onChange={(e) => this.updateField(e)} 
+            value={this.state.username}/>
         </Field>
         
         <Field>
           <Label>
             Email: 
           </Label>
-          <Input className="email-field" type='email' placeholder='example@mail.com' onChange={(e) => this.updateEmail(e)} value={this.state.email}></Input>    
+          <Input 
+            className="email-field" 
+            name='email'
+            type='email' 
+            placeholder='example@mail.com' 
+            onChange={(e) => this.updateField(e)} 
+            value={this.state.email}></Input>    
           <p id="email-help" className="hide help is-danger">Please enter a valid email address.</p>
         </Field>
 
@@ -119,7 +113,12 @@ class SignUp extends Component{
           <Label>
             Create Password: 
           </Label>
-          <Input className="password-field" type='password' onChange={(e)=> this.updatePassword(e)} value={this.state.password}></Input>
+          <Input 
+            className="password-field" 
+            name='password'
+            type='password' 
+            onChange={(e)=> this.updateField(e)} 
+            value={this.state.password}></Input>
           <p id="password-help" className="hide help is-danger">Please enter a valid password. <br/> Valid passwords contain at least 1 upper and lowercase letter and number. Minimum length is 8 characters long.</p>
         </Field>
 
@@ -127,7 +126,12 @@ class SignUp extends Component{
           <Label>
             Verify Password: 
           </Label>
-          <Input className="verify-field" type='password' onChange={(e) => this.updateVerifyPassword(e)} value={this.state.verifyPassword}></Input>
+          <Input 
+            className="verify-field" 
+            name='verifyPassword'
+            type='password' 
+            onChange={(e) => this.updateField(e)} 
+            value={this.state.verifyPassword}></Input>
           <p id="verify-help" className="hide help is-danger">Passwords do not match.</p>
         </Field>
         <Field>
