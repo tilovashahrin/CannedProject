@@ -25,7 +25,7 @@ class Search extends Component{
       .then(response => response.json())
       .then((data) => {
         this.setState({
-          data: data
+          data: data.shows
         }); 
       })
     }
@@ -37,7 +37,7 @@ class Search extends Component{
     }
     return <div className="search-results">
       <TopicHeader text='Search Results: '/>
-      {this.state.data.podcasts.map((item) => <PodcastListitem podcastID={item}/>)}
+      {this.state.data.items.map((item) => <PodcastListitem podcastID={item.id}/>)}
     </div>
   }
 

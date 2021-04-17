@@ -11,7 +11,7 @@ import './podcast.css';
 class Podcast extends Component{
   constructor(props){
     super(props); 
-    this.state = {data: null, reviews:null}; 
+    this.state = {data: null, episodes: null, reviews:null}; 
   }
 
   componentDidMount(){
@@ -20,7 +20,15 @@ class Podcast extends Component{
       .then(response => response.json())
       .then((data)=>{
         this.setState({
-          data: data, 
+          data: data.shows[0], 
+        }); 
+      })
+      fetch(`http://localhost:8080/podcasts/${this.props.location.state.podcastID}/episodes`)
+      .then(response => response.json())
+      .then((data)=>{
+        console.log(data); 
+        this.setState({
+          episodes: data, 
         }); 
       })
       fetch(`http://localhost:8080/podcasts/${this.props.location.state.podcastID}/reviews`)
@@ -38,17 +46,17 @@ class Podcast extends Component{
   }
 
   render(){
-    if (this.state.data == null || this.state.reviews == null ){
+    if (this.state.data == null || this.state.reviews == null || this.state.episodes == null){
       return <Loading/>
     }
     else{
       return <div className="podcast-page">
-        <BannerImage image={this.state.data.episodes.items[0]['images'][0]['url']} title={this.state.data.name} description={this.state.data.description}/>
+        <BannerImage image={this.state.data['images'][0]['url']} title={this.state.data.name} description={this.state.data.description}/>
         <TopicHeader text="Latest Episodes"/>
         <div className="episodes">
           <ul>
             {
-              this.state.data.episodes.items.map((value) => <li key={value.uri}>
+              this.state.episodes.items.map((value) => <li key={value.uri}>
                   <EpisodeTile episode={value}/>
                 </li>)
             }
