@@ -27,14 +27,6 @@ class Home extends Component {
   render() {
     // const [category, setCategory] = useState('Comedy');
 
-    const onClickItem = (c) => {
-      // console.log(c)
-      // setCategory(c)
-      this.setState({
-        category: c,
-      });
-    }
-
 
     if (this.state.data == null) {
       return <Loading />
@@ -64,10 +56,10 @@ class Home extends Component {
             </div>
             <nav className="breadcrumb has-bullet-separator is-centered" aria-label="breadcrumbs">
               <ul>
-                <li><a href="#" onClick={() => this.setState({ category: "Comedy" })} >Comedy</a></li>
-                <li><a href="#" onClick={() => this.setState({ category: "Sports" })}>Sports</a></li>
-                <li><a href="#" onClick={() => this.setState({ category: "News" })}>News</a></li>
-                <li><a href="#" onClick={() => this.setState({ category: "Show" })}>Show</a></li>
+                <li key="Comedy"><a href="#" onClick={() => this.setState({ category: "Comedy" })} >Comedy</a></li>
+                <li key="Sports"><a href="#" onClick={() => this.setState({ category: "Sports" })}>Sports</a></li>
+                <li key="News"><a href="#" onClick={() => this.setState({ category: "News" })}>News</a></li>
+                <li key="Show"><a href="#" onClick={() => this.setState({ category: "Show" })}>Show</a></li>
               </ul>
             </nav>
           </section>
