@@ -13,7 +13,8 @@ function PodcastListItem(props){
     fetch(`http://localhost:8080/podcasts/${podcastID}`)
     .then(response => response.json())
     .then((data)=>{
-      setPodcastData(data); 
+      console.log(data); 
+      setPodcastData(data.shows[0]); 
     }); 
   }, [])
 
@@ -22,7 +23,7 @@ function PodcastListItem(props){
       return ""; 
     }
     else{
-      return podcastData.episodes.items[0]['images'][0]['url']; 
+      return podcastData['images'][0]['url']; 
     }
   }
 

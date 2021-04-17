@@ -20,7 +20,6 @@ class Home extends Component {
     fetch(`http://localhost:8080/trending`)
     .then(response => response.json())
     .then((data)=>{
-      console.log(data); 
       this.setState({
         data: data,
       });
