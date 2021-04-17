@@ -32,6 +32,12 @@ class Account extends Component{
       <h2 className="account-back">back</h2>
       <h2 className="account-name">{this.state.data.name}</h2>
       <div className="bar"></div>
+      <TopicHeader text="Account Information"/>
+      <div class="acc">
+        <h1 id="account-name">Name: {this.state.data.name}</h1>
+        <h1 id="account-email">Email: {this.state.data.email}</h1>
+        <h1 id="account-id">ID: {this.state.data.id}</h1>
+      </div>
       <TopicHeader text="Favourite Podcasts"/>
       {this.state.data.favourites.map((id) => <PodcastListItem podcastID={id}/>)}
       <TopicHeader text="Ratings over the Year"/>
