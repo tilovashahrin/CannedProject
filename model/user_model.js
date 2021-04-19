@@ -1,8 +1,9 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+const {MongoClient} = require('mongodb');
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect('mongodb://localhost:27017/canned_pods_test', {
+mongoose.connect('mongodb+srv://sunny:NpeyKCnXQtW3S1wU@cluster0.1hv4s.mongodb.net/cannedpods?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }, function (error) {
