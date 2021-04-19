@@ -1,5 +1,11 @@
 .banner-image{
+  opacity: 0.5;
   position: relative;
+}
+
+.banner-image:hover{
+  transition: opacity 1s;
+  opacity: 1;
 }
 .banner-image img{
   width: 100%; 
@@ -11,8 +17,9 @@
 .banner-text{
   color: white; 
   position: absolute; 
-  left: 5rem; 
-  bottom: 3rem;
+  margin: 3% 5%; 
+  bottom: 0; 
+  left: 0; 
   text-align: left;
 }
 
@@ -27,4 +34,13 @@
   top: 0; 
   left: 0; 
   background: linear-gradient(0deg, black 0%, transparent 100%); 
+}
+
+@media screen and (max-width: 600px){
+  .banner-image img{
+    height: 90vh;
+  }
+  .banner-gradient{
+    height: 90vh; 
+  }
 }

@@ -39,7 +39,9 @@ function EpisodeTile(props){
       <h1>{episode.name}</h1>
     </div>
     <div className="episode-overlay"></div>
-    <img src={episode.images[1].url} alt="Podcast Image"></img>
+    <div className="background">
+      <img src={episode.images[1].url} alt="Podcast Image"></img>
+    </div>
     
   </div>
 }

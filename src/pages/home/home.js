@@ -2,6 +2,7 @@
 // export default (props) => <p>Hello World</p>
 
 import React, { Component, useState } from 'react';
+import { motion } from "framer-motion";
 import Loading from '../../components/loading/loading';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import Rankcard from '../../components/rankcard/rankcard';
@@ -41,7 +42,7 @@ class Home extends Component {
 
 
         <div>
-          <TopicHeader text='Top Trending:' />
+        <TopicHeader text='Top Trending:' />
           <TopicHeader text='Your Recent Reviews: ' />
         </div>
 
@@ -58,10 +59,10 @@ class Home extends Component {
             </div>
             <nav className="breadcrumb has-bullet-separator is-centered" aria-label="breadcrumbs">
               <ul>
-                <li key="Comedy"><a href="#" onClick={() => this.setState({ category: "Comedy" })} >Comedy</a></li>
-                <li key="Sports"><a href="#" onClick={() => this.setState({ category: "Sports" })}>Sports</a></li>
-                <li key="News"><a href="#" onClick={() => this.setState({ category: "News" })}>News</a></li>
-                <li key="Show"><a href="#" onClick={() => this.setState({ category: "Show" })}>Show</a></li>
+                <motion.div whileHover={{ scale: 1.3 }} whileTap={{ scale: 0.9 }}><li><a href="#" onClick={() => this.setState({ category: "Comedy" })} >Comedy</a></li></motion.div>
+                <motion.div whileHover={{ scale: 1.3 }} whileTap={{ scale: 0.9 }}><li><a href="#" onClick={() => this.setState({ category: "Sports" })}>Sports</a></li></motion.div>
+                <motion.div whileHover={{ scale: 1.3 }} whileTap={{ scale: 0.9 }}><li><a href="#" onClick={() => this.setState({ category: "News" })}>News</a></li></motion.div>
+                <motion.div whileHover={{ scale: 1.3 }} whileTap={{ scale: 0.9 }}><li><a href="#" onClick={() => this.setState({ category: "Show" })}>Show</a></li></motion.div>
               </ul>
             </nav>
           </section>
@@ -85,9 +86,6 @@ class Home extends Component {
     }
   }
 }
-
-
-
 
 
 export default Home;
