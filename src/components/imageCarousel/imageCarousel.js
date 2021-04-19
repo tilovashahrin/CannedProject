@@ -3,6 +3,9 @@ import {motion, AnimatePresence } from 'framer-motion';
 
 import './imageCarousel.css'; 
 
+//Implementation was aided from the following exmaple: 
+//https://codesandbox.io/s/framer-motion-image-gallery-pqvx3?fontsize=14&module=%2Fsrc%2FExample.tsx
+
 function ImageCarousel(props){
   const images = [
     'https://static1.cbrimages.com/wordpress/wp-content/uploads/2020/03/fate-saber-featured.jpg?q=50&fit=crop&w=960&h=500&dpr=1.5', 
@@ -36,7 +39,10 @@ function ImageCarousel(props){
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setPage((page + 1)% images.length); 
+      if (page + 1 >= images.length){
+        setPage(0); 
+      }
+      else setPage(page + 1); 
     }, 7000);
     return () => clearInterval(interval);
   }, []); 

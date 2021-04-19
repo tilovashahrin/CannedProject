@@ -6,7 +6,7 @@ function ActivityChart(props){
 
   const canvas = useRef(); 
 
-  const width = 900; 
+  const width = window.innerWidth; 
   const height = 400; 
   const margin = 50; 
   const chartWidth = width - 2 * margin;
