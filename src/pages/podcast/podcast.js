@@ -57,16 +57,16 @@ class Podcast extends Component{
     else{
       return <div className="podcast-page">
         <BannerImage image={this.state.data['images'][0]['url']} title={this.state.data.name} description={this.state.data.description}/>
-        <div id = "btn" class="heartbtn" onClick={this.clicked}>
-          <div class="insidebtn">
-              <span class="favorite">Favourite</span>
+        <div id = "btn" className="heartbtn" onClick={this.clicked}>
+          <div className="insidebtn">
+              <span className="favorite">Favourite</span>
           </div>
         </div>
         <TopicHeader text="Latest Episodes"/>
         <div className="episodes">
           <ul>
             {
-              this.state.episodes.items.map((value) => <li key={value.uri}>
+              this.state.episodes.items.slice(0,4).map((value) => <li key={value.uri}>
                   <EpisodeTile episode={value}/>
                 </li>)
             }

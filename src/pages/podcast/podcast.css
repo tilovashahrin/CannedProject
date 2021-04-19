@@ -1,12 +1,12 @@
 .episodes{
-  padding: 0 5rem; 
+  margin: auto;
 }
 
 .episodes li{
   opacity: 0.5;
   cursor: pointer;
   float: left; 
-  padding-right: 1rem; 
+  padding: .5rem;
 }
 
 .episodes li:hover{
@@ -41,7 +41,13 @@
   color: rgb(0, 0, 0);
 }
 
-.insidebtn:hover{
-  transition: background 0.5s;;
+.insidebtn :hover{
+  transition: 0.5s;
   background: rgb(224, 88, 88);
+}
+@media screen and (max-width: 600px){
+  .episodes li{
+  float: none; 
+    padding-right: 0; 
+  }
 }
