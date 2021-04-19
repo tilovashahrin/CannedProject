@@ -43,15 +43,25 @@ class Podcast extends Component{
 
   onCreateReview(data){
     console.log(data); 
-  }
+  }  
 
   render(){
+    const clicked = (c) => {
+      console.log(c)
+    // alert('Clicked!');
+    }
+
     if (this.state.data == null || this.state.reviews == null || this.state.episodes == null){
       return <Loading/>
     }
     else{
       return <div className="podcast-page">
         <BannerImage image={this.state.data['images'][0]['url']} title={this.state.data.name} description={this.state.data.description}/>
+        <div id = "btn" className="heartbtn" onClick={this.clicked}>
+          <div className="insidebtn">
+              <span className="favorite">Favourite</span>
+          </div>
+        </div>
         <TopicHeader text="Latest Episodes"/>
         <div className="episodes">
           <ul>

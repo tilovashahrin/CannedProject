@@ -30,3 +30,13 @@
 #account-name, #account-email, #account-id{
   font-size: 30px;
 }
+
+.account-welcome:hover{
+  transition: opacity 0.5s;
+  opacity: 1;
+}
+
+.account-back:hover{
+  transition: opacity 1s;
+  opacity: 1;
+}
