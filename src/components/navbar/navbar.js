@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect} from "react";
 import { useHistory, Link } from "react-router-dom";
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import { Navbar, Form, Box} from 'react-bulma-components';
@@ -24,15 +24,20 @@ function NavBar(props) {
     { name: 'Trending', target: '/trending' }
   ];
   const history = useHistory();
-  const [isMobile, setMobile] = useState(false); 
+  const [isMobile, setMobile] = useState(window.innerWidth< 1050); 
   const [isActive, setActive] = useState(false); 
 
   var [searchQuery, setSearchQuery] = useState('');
   var [showLogin, setLogin] = useState(false); 
 
-  useEffect(() => {
-    setMobile(window.innerWidth < 600); 
+  useLayoutEffect(() => {
+    const checkMobile = () => setMobile(window.innerWidth < 1050); 
+    window.addEventListener('resize', checkMobile); 
   }, []); 
+
+  history.listen((_, __) => {
+    setActive(false); 
+  })
 
   const onEnterSearch = (e) => {
     if (e.key === 'Enter') {
