@@ -37,8 +37,8 @@ class Account extends Component{
       return <Loading/>; 
     }
     return <div className="account-page">
-      <h2 className="account-welcome">Welcome </h2>
-      <h2 className="account-back">back</h2>
+      <h2 className="account-welcome">Welcome Back</h2>
+      <h2 className="account-back"></h2>
       <h2 className="account-name">{this.state.data.name}</h2>
       <div className="bar"></div>
       <TopicHeader text="Account Information"/>
