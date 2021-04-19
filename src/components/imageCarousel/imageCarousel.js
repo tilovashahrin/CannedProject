@@ -36,7 +36,10 @@ function ImageCarousel(props){
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setPage((page + 1)% images.length); 
+      if (page + 1 >= images.length){
+        setPage(0); 
+      }
+      else setPage(page + 1); 
     }, 7000);
     return () => clearInterval(interval);
   }, []); 
