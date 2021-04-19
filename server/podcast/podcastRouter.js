@@ -1,6 +1,6 @@
 const express = require('express'); 
 const router = express.Router(); 
-
+const {Review} = require('../models/review_model'); 
 const {getShow, getEpisodes, searchShow} = require('./spotifyWrapper'); 
 
 //temporary files
@@ -21,7 +21,7 @@ router.get('/:id/episodes', function(req, res){
 }); 
 
 router.get('/:id/reviews', function(req, res){
-  res.send(reviewData); 
+  Review.find({}).then((data) => res.send(data)); 
 })
 
 router.get('/search/:query', function(req, res){
