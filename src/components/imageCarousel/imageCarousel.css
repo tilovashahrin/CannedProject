@@ -18,11 +18,9 @@
 }
 
 .selectors{
-  position: absolute;
-  bottom: 0;
-  left: 50%; 
-  display: flex;
-
+  position: relative;
+  display: inline-block;
+  margin: auto;
 }
 
 .circle{

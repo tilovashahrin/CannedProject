@@ -1,11 +1,19 @@
-const express = require('express');
-let app = express();
+const express = require('express'); 
+const session = require('express-session'); 
+const cors = require('cors'); 
+const {v4: uuidv4} = require('uuid'); 
+
+let podcastRoute = require('./podcast/podcastRouter'); 
+let accountRoute = require('./account/accountRouter'); 
+
+const { MongoClient } = require('mongodb');
+const secrets = require('./secrets.json'); 
+const uri = `mongodb+srv://${secrets.mongodb.username}:${secrets.mongodb.password}@cluster0.1hv4s.mongodb.net/cannedpods?retryWrites=true&w=majority`
+const client = new MongoClient(uri);
+
 // const review_model = require('./model/review_model.js') // import from local machine
 // const user_model = require('./model/user_model.js') // import from local machine
 
-const { MongoClient } = require('mongodb');
-const uri = 'mongodb+srv://sunny:NpeyKCnXQtW3S1wU@cluster0.1hv4s.mongodb.net/cannedpods?retryWrites=true&w=majority'
-const client = new MongoClient(uri);
 
 async function test(client) {
   
@@ -31,7 +39,7 @@ async function test(client) {
 }
 
 async function listDatabases(client) {
-  databasesList = await client.db().admin().listDatabases();
+  const databasesList = await client.db().admin().listDatabases();
 
   console.log("Databases: ");
   databasesList.databases.forEach(db => console.log(` - ${db.name}`))
@@ -60,3 +68,31 @@ test(client).catch(console.error);
 //   })
 
 // });
+
+//temp data
+const tempTrendingData = require('./tempData/tempTrending.json'); 
+
+let app = express(); 
+app.use(cors()); 
+app.use('/podcasts', podcastRoute);
+app.use('/account', accountRoute);  
+
+app.use(session({
+  genid: () => uuidv4(), 
+  resave: false, 
+  saveUninitialized: false, 
+  cookie: {secure: true},
+  secret: 'some secret'
+})); 
+
+app.get('/trending', function(req, res){
+  res.send(tempTrendingData); 
+}); 
+app.get('/api', (req, res) => res.send(app.routes)); 
+
+
+app.set('port', process.env.PORT || 8080); 
+app.listen(app.get('port'), function(){
+  console.log(`Listening on port ${app.get('port')}`); 
+}); 
+

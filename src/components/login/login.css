@@ -1,0 +1,25 @@
+.login-card{
+  position: absolute; 
+  text-align: left;
+  top: 100%; 
+  right: 0; 
+}
+
+.horizontal-line{
+  height: 2px; 
+  background-color: grey;
+  width: 100%;
+  margin: 1rem 0;
+  opacity: .5;
+}
+
+.login-card p{
+  padding: 1rem 0 ;
+}
+
+@media screen and (max-width: 600px){
+  .login-card{
+    position: relative;
+    text-align: left;
+  }
+}
