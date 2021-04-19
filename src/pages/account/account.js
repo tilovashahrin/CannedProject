@@ -1,13 +1,21 @@
 import React, {Component} from 'react'; 
+import {useSpring, animated} from 'react-spring';
+import ReactDOM from "react-dom";
 import Loading from '../../components/loading/loading'; 
 import TopicHeader from '../../components/topicHeader/topicHeader'; 
 import PodcastListItem from '../../components/podcastListItem/podcastListItem'; 
 import ActivityChart from '../../components/activityChart/activityChart'; 
 import './account.css'; 
 
-
+// const AniText = ()=>{
+//   const contentprops = useSpring({
+//     from: {opacity: 0}, 
+//     to: {opacity: 1}
+//   });
+// }
 
 class Account extends Component{
+
   constructor(props){
     super(); 
     this.state = {data: null}; 
@@ -24,6 +32,7 @@ class Account extends Component{
   }
 
   render(){
+
     if (this.state.data == null){
       return <Loading/>; 
     }
@@ -45,5 +54,6 @@ class Account extends Component{
     </div>
   }
 }
-
+// const rootElement = document.getElementById("root");
+// ReactDOM.render(<AniText />, rootElement);
 export default Account; 

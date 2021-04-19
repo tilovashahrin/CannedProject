@@ -2,6 +2,7 @@
 // export default (props) => <p>Hello World</p>
 
 import React, { Component } from 'react';
+import { Spring, useSpring } from 'react-spring';
 import Loading from '../../components/loading/loading';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import Rankcard from '../../components/rankcard/rankcard';
@@ -33,15 +34,11 @@ class Home extends Component {
             // need to take a rank-sorted list of podcast 
             let rank = 0;
             return <div className="home-page has-text-left p-0 m-0">
-
-                <div>
-                    <TopicHeader text='Top Trending:' />
-                    {/* <div className="container">
+                        <TopicHeader text='Top Trending:' />
+                         {/* <div className="container">
                         <imageSlider></imageSlider>
-                    </div> */}
-                    <TopicHeader text='Your Recent Reviews: ' />
-                </div>
-
+                        </div> */}
+                         <TopicHeader text='Your Recent Reviews: ' />
                 <section>
 
                     <section className="hero is-small" id="ranktitle">

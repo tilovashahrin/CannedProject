@@ -1,3 +1,7 @@
+.episode-list-item :hover{
+  transition: opacity 0.5s;
+}
+
 .episode-list-item{
   width: 80%; 
   border: 2px solid grey;

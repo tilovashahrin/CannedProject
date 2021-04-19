@@ -15,6 +15,7 @@
   padding: .2em;
 }
 .stars{
+  cursor: pointer;
   fill: none;
   stroke: #646464;
   stroke-width: 2px;
