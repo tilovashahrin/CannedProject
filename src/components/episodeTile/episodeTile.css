@@ -5,6 +5,7 @@
   overflow: hidden;
   border-radius: 1rem;
   position: relative;
+  margin: auto;
 }
 
 .episode-progress {
@@ -35,4 +36,25 @@
   padding: .2rem; 
   color: white; 
   z-index: 2;
+}
+
+@media screen and (max-width: 600px){
+  .episode-tile{
+    width: 85%; 
+    height: calc(85vw * 0.4); 
+  }
+  .episode-tile .background img{
+    width: 100%;
+    height: 100%;
+  }
+  .play-pause{
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100px;
+  }
+  .episode-info{
+    top: 70%;
+    text-align: left;
+  }
 }
