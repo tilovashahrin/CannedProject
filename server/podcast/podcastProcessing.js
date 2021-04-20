@@ -84,5 +84,6 @@ async function getTopPodcasts(){
 module.exports = {
   getPodcastReviewData: getPodcastReviewData, 
   updatePodcastFavourites: updatePodcastFavourites, 
-  getTopPodcasts: getTopPodcasts
+  getTopPodcasts: getTopPodcasts,
+  toPodcastObject: toPodcastObject
 }
