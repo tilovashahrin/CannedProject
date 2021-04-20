@@ -18,7 +18,7 @@ class Account extends Component{
 
   constructor(props){
     super(); 
-    this.state = {data: null}; 
+    this.state = {data: null, isLoggedIn: null}; 
   }
 
   componentDidMount(){
@@ -27,15 +27,19 @@ class Account extends Component{
     .then((data) => {
       console.log(data); 
       this.setState({
-        data: data.data
+        data: data.data,
+        isLoggedIn: data.reqStatus
       }); 
     })
   }
 
   render(){
 
-    if (this.state.data == null){
+    if (this.state.data == null && this.state.isLoggedIn == null){
       return <Loading/>; 
+    }
+    else if (!this.state.isLoggedIn){
+      return <TopicHeader text='Please login to View.'></TopicHeader>
     }
     return <div className="account-page">
       <h2 className="account-welcome">Welcome Back</h2>

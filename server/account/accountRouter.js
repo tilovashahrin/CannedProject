@@ -10,7 +10,7 @@ router.get('/', async function(req, res){
       name: document.name, 
       email: document.email, 
       favPodList: document.favPodList, 
-      reviewHistory: [0,0,0,0,0,0,0,0,0,0,0,0]
+      reviewHistory: [0,0,0,0,0,0,0,0,0,0,0,0].map((item) => Math.floor(Math.random()*(20))) // would use the time stamp method but this produces more interesting graphs
     }; 
     res.send({reqStatus: true, data: data}); 
   }
