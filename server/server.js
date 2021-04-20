@@ -97,7 +97,7 @@ app.use(session({
 }));
 
 app.get('/home', function (req, res) {
-  const reviews = []
+  const reviews = reviewData.items
   if (reviewData.items.length > 4) {
     reviews = reviewData.items.slice(0, 4)
   }
