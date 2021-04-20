@@ -12,9 +12,6 @@ Before you submit your project, modify the following table to include everyone's
 | Yiqing Cao                 | Sunnyc317 |
 
 
-​
-_**Note:** You can delete the unused rows from the table._
-​
 
 ## Link to Independant Study
 https://docs.google.com/presentation/d/1yxPW4x8Fq5zhkn26kV6CI4accEoO7q1Wi2sQmbuF9U4/edit?usp=sharing
@@ -27,7 +24,7 @@ node server.js
 cd .. 
 npm start
 ```
-*The credentials-file (`secrets.json`) for accessing the database and spotify API will be shared by a team-member through slack and is to be placed in the `server` folder. 
+*The credentials-file (`secrets.json`) for accessing the database and spotify API is available [here](https://drive.google.com/file/d/1r8pcRH89_lyzbj2zYeRoIODiuYEGlHEu/view?usp=sharing) and will also be shared by a team-member through slack and is to be placed in the `server` folder. 
 
 ## Overview
 This group project is designed for you to demonstrate the skills that you have learned in this course.  The final project that you submit in the last week of classes will be a completed web application.  Non-functional requirements, especially those associated with production-readiness, will be considered extremely important when marking this project.  You are expected to work in a group of 3-5 when completing this project.  Students will be prohibited from working alone on the project, as this eliminates one of the learning objectives of this assessment.  
