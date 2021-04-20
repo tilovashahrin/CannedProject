@@ -93,11 +93,12 @@ app.use(session({
   secret: 'some secret'
 })); 
 
+app.use('/podcasts', podcastRoute);
+app.use('/account', accountRoute);
+
 app.get('/home', function(req, res){
   res.send({"podcasts": tempTrendingData, "user": userData}); 
-
-app.use('/podcasts', podcastRoute);
-app.use('/account', accountRoute);  
+  
 }); 
 
 app.get('/trending', function(req, res){

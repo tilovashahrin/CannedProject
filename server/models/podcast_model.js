@@ -21,9 +21,10 @@ let Schema = mongoose.Schema;
 
 let podcastSchema = new Schema(
     {
-      "id": String, 
       'podcastID': String, 
       'reviewCount': Number,
+      'rating': Number, 
+      'favourites': Number
     }
     , {
     collection: 'podcast'
