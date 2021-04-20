@@ -12,7 +12,7 @@ import './podcast.css';
 class Podcast extends Component{
   constructor(props){
     super(props); 
-    this.state = {data: null, episodes: null, reviews:null, isLoggedIn: false, fav: false, callback}; 
+    this.state = {data: null, episodes: null, reviews:null, isLoggedIn: false, fav: false}; 
     this.loadData = this.loadData.bind(this); 
   }
   
