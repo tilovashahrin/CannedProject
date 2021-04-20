@@ -26,7 +26,6 @@ class Podcast extends Component{
       fetch(`http://localhost:8080/podcasts/${this.props.location.state.podcastID}/episodes`)
       .then(response => response.json())
       .then((data)=>{
-        console.log(data); 
         this.setState({
           episodes: data, 
         }); 
@@ -34,6 +33,7 @@ class Podcast extends Component{
       fetch(`http://localhost:8080/podcasts/${this.props.location.state.podcastID}/reviews`)
       .then(response => response.json())
       .then((data)=>{
+        console.log(data); 
         this.setState({
           reviews: data, 
         }); 
@@ -79,7 +79,7 @@ class Podcast extends Component{
           <ReviewField author="user" callback={(data) => this.onCreateReview(data)}/>
           <ul>
             {
-              this.state.reviews.items.map((item) => 
+              (this.state.reviews.length === 0) ? <div/> : this.state.reviews.items.map((item) => 
                 <li>
                   <ReviewCard review={item}/>
                 </li>
