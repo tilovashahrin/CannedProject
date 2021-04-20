@@ -8,9 +8,9 @@ import './imageCarousel.css';
 
 function ImageCarousel(props){
   const images = [
-    'https://static1.cbrimages.com/wordpress/wp-content/uploads/2020/03/fate-saber-featured.jpg?q=50&fit=crop&w=960&h=500&dpr=1.5', 
-    'https://besthqwallpapers.com/Uploads/23-4-2020/130105/thumb2-artoria-pendragon-battle-fate-grand-order-saber-alter-artwork.jpg',
-    'https://www.wallpaperup.com/uploads/wallpapers/2016/09/04/1014973/cbb08c6b4e1582ccff1a8a523e125fcd.jpg'
+    './images/ppl1.png', 
+    './images/ppl2.png',
+    './images/ppl2.jpg'
   ]; 
 
   const [page, setPage] = useState(0); 
