@@ -22,11 +22,12 @@ class Account extends Component{
   }
 
   componentDidMount(){
-    fetch('http://localhost:8080/account/')
+    fetch('http://localhost:8080/account/', {credentials: 'include'})
     .then(response => response.json())
     .then((data) => {
+      console.log(data); 
       this.setState({
-        data: data
+        data: data.data
       }); 
     })
   }
@@ -53,9 +54,9 @@ class Account extends Component{
         <h1 id="following">Following: {this.state.data.following}</h1>
       </div>
       <TopicHeader text="Favourite Podcasts"/>
-      {this.state.data.favourites.map((id) => <PodcastListItem podcastID={id}/>)}
+      {this.state.data.favPodList.map((id) => <PodcastListItem podcastID={id}/>)}
       <TopicHeader text="Ratings over the Year"/>
-      <ActivityChart activity={this.state.data.YTD_reviews}/>
+      <ActivityChart activity={this.state.data.reviewHistory}/>
     </div>
   }
 }
