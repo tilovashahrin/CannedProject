@@ -10,6 +10,7 @@ import Rankcard from '../../components/rankcard/rankcard';
 import TopicHeader from '../../components/topicHeader/topicHeader';
 import ImageCarousel from '../../components/imageCarousel/imageCarousel';
 import TopTrendingBlock from '../../components/topTrendingBlock/topTrendingBlock'
+import ReviewCard from '../../components/reviewCard/reviewCard'
 import TopTrendingTile from '../../components/topTrendingTile/topTrendingTile'
 import 'react-notifications/lib/notifications.css';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
@@ -20,7 +21,7 @@ import './home.css';
 class Home extends Component {
   constructor(props) {
     super();
-    this.state = { data: null, category: 'Comedy', user: null };
+    this.state = { data: null, category: 'Comedy', user: null, reviews:null };
     // this.state = { category: 'Comedy'}
   }
 
@@ -30,7 +31,8 @@ class Home extends Component {
       .then((data) => {
         this.setState({
           data: data.podcasts,
-          user: data.user
+          user: data.user, 
+          reviews: data.review
         });
       });
   }
@@ -54,16 +56,16 @@ class Home extends Component {
 
   render() {
     const images = [
-      './images/99invs.png', 
-      './images/steve.jpg', 
+      './images/99invs.png',
+      './images/steve.jpg',
       './images/adnan_syed.jpg',
-      './images/steve.jpg', 
-      './images/99invs.png', 
+      './images/steve.jpg',
+      './images/99invs.png',
       './images/adnan_syed.jpg',
-      './images/steve.jpg', 
+      './images/steve.jpg',
       './images/adnan_syed.jpg',
       './images/99invs.png',
-    ]; 
+    ];
 
     const inFavList = (podcastID) => {
       this.state.user.favourites.forEach((pod) => {
@@ -95,12 +97,12 @@ class Home extends Component {
       return <div className="home-page has-text-left p-0 m-0">
         <ImageCarousel />
 
-
         <div className="columns ">
-          <TopTrendingBlock images={images}/>
-          <div className="columns is-half has-margin-top-20">
+          <TopTrendingBlock images={images} />
+          <div className=" has-margin-top-10">
             <TopicHeader text='Your Recent Review' />
             <section className="container">
+              {this.state.reviews.map((review) => <ReviewCard review={review}></ReviewCard>)}
             </section>
           </div>
         </div>
