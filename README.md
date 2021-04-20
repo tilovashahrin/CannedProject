@@ -21,7 +21,7 @@ https://docs.google.com/presentation/d/1yxPW4x8Fq5zhkn26kV6CI4accEoO7q1Wi2sQmbuF
 npm install 
 cd server
 node server.js
-cd .. 
+(Switch to another terminal at the projects root directory)
 npm start
 ```
 *The credentials-file (`secrets.json`) for accessing the database and spotify API is available [here](https://drive.google.com/file/d/1r8pcRH89_lyzbj2zYeRoIODiuYEGlHEu/view?usp=sharing) and will also be shared by a team-member through slack and is to be placed in the `server` folder. 
