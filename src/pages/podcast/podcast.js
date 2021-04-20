@@ -1,5 +1,5 @@
 import React, {Component} from 'react'; 
-import { Media} from 'react-bulma-components';
+import { Card, Media, Content, Heading, Image, Section, Container } from 'react-bulma-components';
 import Loading from '../../components/loading/loading'; 
 import BannerImage from '../../components/bannerImage/bannerImage'; 
 import EpisodeTile from '../../components/episodeTile/episodeTile'; 
@@ -108,7 +108,7 @@ class Podcast extends Component{
               <span className="favorite">Favourite</span>
           </div>
         </div> */}
-        <Media.Item>
+        <Media.Item position="left">
         <div>
           {/* {(fav) ? <button className="button is-priority" onClick= {() => callback(toggleFav())}>Add to Favourite</button> : <button className="button is-priority" onClick= {() => callback(toggleFav())}>remove from Favourite</button> } */}
           {(this.state.fav) ? <button className="button" onClick={() => this.toggleFav(this.state.podcastID)}><img src="./images/icons/filled_heart.svg" /><div>Remove from Fav</div></button> :

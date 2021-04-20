@@ -27,25 +27,21 @@
 button{
   /* border: 5px solid rgb(224, 88, 88);
   border-radius: 8px; */
+  border: none;
+  border-radius: 4px;
   background: rgb(224, 88, 88);
   display: flex;
   cursor: pointer;
-  padding: 4px;
+  padding: 8px;
 }
 
 .inside-btn{
-  /* height: 20px;
-  width: 40px; */
   font-size: 15px;
   font-weight: 400;
   font-family: sans-serif;
   color: white;
 }
 
-button:hover{
-  transition: 0.5s;
-  background: rgb(224, 88, 88);
-}
 @media screen and (max-width: 600px){
   .episodes li{
   float: none; 
