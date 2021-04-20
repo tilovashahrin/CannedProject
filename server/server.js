@@ -1,7 +1,9 @@
 const express = require('express'); 
 const session = require('express-session'); 
+var cookieParser = require('cookie-parser');
 const cors = require('cors'); 
 const {v4: uuidv4} = require('uuid'); 
+
 
 let podcastRoute = require('./podcast/podcastRouter'); 
 let accountRoute = require('./account/accountRouter'); 
@@ -51,17 +53,21 @@ test(client).catch(console.error);
 const tempTrendingData = require('./tempData/tempTrending.json'); 
 
 let app = express(); 
-app.use(cors()); 
-app.use('/podcasts', podcastRoute);
-app.use('/account', accountRoute);  
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
+app.use(cors({origin: 'http://localhost:3000', credentials: true})); 
 
+app.use(cookieParser());
 app.use(session({
   genid: () => uuidv4(), 
-  resave: false, 
-  saveUninitialized: false, 
-  cookie: {secure: true},
+  resave: true,
+  saveUninitialized: true,
+  cookie: {secure: false},
   secret: 'some secret'
 })); 
+
+app.use('/podcasts', podcastRoute);
+app.use('/account', accountRoute);  
 
 app.get('/trending', function(req, res){
   res.send(tempTrendingData); 
