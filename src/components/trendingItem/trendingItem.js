@@ -17,7 +17,7 @@ function TrendingItem(props) {
   const creator = pod.publisher;
   const podcastID = pod.id;
 
-  const rating = 4.5; // pod.rating
+  const rating = pod.rating; // pod.rating
   // console.log(image)
   const [episodes, setEpisodes] = useState([]); 
   const onClickItem = () => {
@@ -47,7 +47,7 @@ function TrendingItem(props) {
 
     var stars = []
     for (let i = 1; i < 6; i++) {
-      if (i < rating) {
+      if (i <= rating) {
         stars.push(true)
       } else {
         stars.push(false)

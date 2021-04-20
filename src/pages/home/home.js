@@ -23,41 +23,41 @@ class Home extends Component {
     super();
     this.state = { data: null, category: 0, user: null, reviews: null };
 
-    this.loadData = this.loadData.bind(this); 
-    this.addFavNotification = this.addFavNotification.bind(this); 
+    this.loadData = this.loadData.bind(this);
+    this.addFavNotification = this.addFavNotification.bind(this);
   }
 
-  loadData(){
+  loadData() {
     fetch(`http://localhost:8080/home`)
-    .then(response => response.json())
-    .then((data)=>{
-      console.log(data); 
-      this.setState({
-        data: [data.podcasts.topFav, data.podcasts.topRated, data.podcasts.topReviewed],
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data);
+        this.setState({
+          data: [data.podcasts.topFav, data.podcasts.topRated, data.podcasts.topReviewed],
+        });
       });
-    }); 
 
-    fetch('http://localhost:8080/account/', {credentials: 'include'})
-    .then(response => response.json())
-    .then(data => {
-      this.setState({user: data.data}); 
-      console.log(data);
-      // if (data.reqStatus){
-      //   fetch(`http://localhost:8080/podcasts/latestUserReview`, {credentials: 'include'})
-      //   .then(response => response.json())
-      //   .then(review => {
-      //     console.log(review); 
-      //     this.setState({reviews: review}); 
-      //   })
-      // }
-    })
+    fetch('http://localhost:8080/account/', { credentials: 'include' })
+      .then(response => response.json())
+      .then(data => {
+        this.setState({ user: data.data });
+        console.log(data);
+        // if (data.reqStatus){
+        //   fetch(`http://localhost:8080/podcasts/latestUserReview`, {credentials: 'include'})
+        //   .then(response => response.json())
+        //   .then(review => {
+        //     console.log(review); 
+        //     this.setState({reviews: review}); 
+        //   })
+        // }
+      })
   }
 
   componentDidMount() {
-    this.loadData(); 
+    this.loadData();
   }
-  inFavList(podcastID){
-    if (this.state.user == null) return false; 
+  inFavList(podcastID) {
+    if (this.state.user == null) return false;
     this.state.user.favPodList.forEach((pod) => {
       if (pod === podcastID) {
         return true
@@ -82,34 +82,36 @@ class Home extends Component {
     };
   };
   render() {
+    var imageslist = []
     const images = [
       './images/99invs.png',
-      './images/steve.jpg',
       './images/adnan_syed.jpg',
       './images/steve.jpg',
-      './images/99invs.png',
-      './images/adnan_syed.jpg',
-      './images/steve.jpg',
-      './images/adnan_syed.jpg',
-      './images/99invs.png',
     ];
+    if (this.state.data != null) {
+      var allpods = this.state.data[0]
+      imageslist = imageslist.concat(allpods.map((pod) => pod.images[0].url))
+      imageslist = imageslist.concat(images)
+      imageslist = imageslist.concat(allpods.map((pod) => pod.images[0].url))
+      imageslist = imageslist.concat(images)
+    }
 
     const toggleFav = (podcastID) => {
       if (user != null) {
         // this.addFavNotification('adding');
         fetch('http://localhost:8080/account/toggleFavourites', {
-          credentials: 'include', 
+          credentials: 'include',
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },
-          method: 'POST', 
-          body: JSON.stringify({podcastID: podcastID})
+          method: 'POST',
+          body: JSON.stringify({ podcastID: podcastID })
         })
-        .then(response => response.json())
-        .then(data => {
-          this.loadData(); 
-        })
+          .then(response => response.json())
+          .then(data => {
+            this.loadData();
+          })
         console.log(`${this.state.user.name} added ${podcastID} podcast to their favpodlist`)
       } else {
         // this.addFavNotification('not loggedin')
@@ -125,16 +127,16 @@ class Home extends Component {
     else {
       // need to take a rank-sorted list of podcast 
       let rank = 0;
-      let favs = (this.state.user == null) ? [] : this.state.user.favPodList; 
+      let favs = (this.state.user == null) ? [] : this.state.user.favPodList;
       return <div className="home-page has-text-left p-0 m-0">
         <ImageCarousel />
 
         <div className="columns ">
-          <TopTrendingBlock images={images} />
+          <TopTrendingBlock images={imageslist} />
           <div className=" has-margin-top-10 hide">
             <TopicHeader text='Your Recent Review' />
             <section className="container">
-              { (this.state.reviews)? this.state.reviews.map((review) => <ReviewCard review={review}></ReviewCard>): <div/>}
+              {(this.state.reviews) ? this.state.reviews.map((review) => <ReviewCard review={review}></ReviewCard>) : <div />}
             </section>
           </div>
         </div>
@@ -153,9 +155,9 @@ class Home extends Component {
             <nav className="breadcrumb has-bullet-separator is-centered" aria-label="breadcrumbs">
               <ul>
                 <motion.div whileHover={{ scale: 1.3 }} whileTap={{ scale: 0.9 }}><li><a href="#" onClick={() => this.setState({ category: 0 })} >Top Favourited</a></li></motion.div>
-                <motion.div whileHover={{ scale: 1.3 }} whileTap={{ scale: 0.9 }}><li><a href="#" onClick={() => this.setState({ category: 1})}>Top Rated</a></li></motion.div>
+                <motion.div whileHover={{ scale: 1.3 }} whileTap={{ scale: 0.9 }}><li><a href="#" onClick={() => this.setState({ category: 1 })}>Top Rated</a></li></motion.div>
                 <motion.div whileHover={{ scale: 1.3 }} whileTap={{ scale: 0.9 }}><li><a href="#" onClick={() => this.setState({ category: 2 })}>Top Reviewed</a></li></motion.div>
-              
+
               </ul>
             </nav>
           </section>
