@@ -22,11 +22,12 @@ class Trending extends Component {
     fetch('http://localhost:8080/trending/')
     .then(response => response.json())
     .then((data) => {
+      console.log(data.loggedin)
       this.setState({
         user: data.user, 
-        favouritePodList: data.podcasts,
-        trendingPodList: data.podcasts,
-        loginStatus: data.loggedin
+        favouritePodList: data.favouritePodList,
+        trendingPodList: data.trendingPodList,
+        loginStatus: data.loginStatus
       }); 
     })
   }

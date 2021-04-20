@@ -93,20 +93,16 @@ app.use(session({
   secret: 'some secret'
 })); 
 
-<<<<<<< HEAD
 app.get('/home', function(req, res){
   res.send({"podcasts": tempTrendingData, "user": userData}); 
-=======
+
 app.use('/podcasts', podcastRoute);
 app.use('/account', accountRoute);  
-
-app.get('/trending', function(req, res){
-  res.send(tempTrendingData); 
->>>>>>> main
 }); 
 
 app.get('/trending', function(req, res){
-  res.send({"podcasts": tempTrendingData, "user": userData, "loggedin": loggedin}); 
+  
+  res.send({ "user": userData, "favouritePodList": tempTrendingData, "trendingPodList": tempTrendingData, "loginStatus": loggedin }); 
 }); 
 app.get('/api', (req, res) => res.send(app.routes)); 
 

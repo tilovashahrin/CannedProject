@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const secrets = require('../secrets.json'); 
-const uri = `mongodb+srv: ${secrets.mongodb.username}:${secrets.mongodb.password}@cluster0.1hv4s.mongodb.net/CannedPods?retryWrites=true&w=majority`
+const uri = `mongodb+srv://${secrets.mongodb.username}:${secrets.mongodb.password}@cluster0.1hv4s.mongodb.net/CannedPods?retryWrites=true&w=majority`;
 
 mongoose.Promise = global.Promise;
 
