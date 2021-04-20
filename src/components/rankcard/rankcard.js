@@ -10,11 +10,11 @@ function Rankcard(props) {
   const { value, rank, fav, callback } = props
   const history = useHistory();
 
-  const image = value.episodes.items[0]['images'][0]['url'];
+  const image = value['images'][0]['url'];
   const title = value.name;
   const description = value.description;
   const creator = value.publisher;
-  const rating = 4.5; // value.rating
+  const rating = value.rating; // value.rating
   const ranking = rank;
   const podcastID = value.id;
 
@@ -43,7 +43,7 @@ function Rankcard(props) {
 
     var stars = []
     for (let i = 1; i < 6; i++) {
-      if (i < rating) {
+      if (i <= rating) {
         stars.push(true)
       } else {
         stars.push(false)

@@ -17,7 +17,7 @@ import './home.css';
 class Home extends Component {
   constructor(props) {
     super();
-    this.state = { data: null, category: 'Comedy', user: null };
+    this.state = { data: null, category: 0, user: null };
     // this.state = { category: 'Comedy'}
     this.loadData = this.loadData.bind(this); 
   }
@@ -28,7 +28,7 @@ class Home extends Component {
     .then((data)=>{
       console.log(data); 
       this.setState({
-        data: data.podcasts,
+        data: [data.podcasts.topFav, data.podcasts.topRated, data.podcasts.topReviewed],
       });
     }); 
 
@@ -124,10 +124,10 @@ class Home extends Component {
             </div>
             <nav className="breadcrumb has-bullet-separator is-centered" aria-label="breadcrumbs">
               <ul>
-                <motion.div whileHover={{ scale: 1.3 }} whileTap={{ scale: 0.9 }}><li><a href="#" onClick={() => this.setState({ category: "Comedy" })} >Comedy</a></li></motion.div>
-                <motion.div whileHover={{ scale: 1.3 }} whileTap={{ scale: 0.9 }}><li><a href="#" onClick={() => this.setState({ category: "Sports" })}>Sports</a></li></motion.div>
-                <motion.div whileHover={{ scale: 1.3 }} whileTap={{ scale: 0.9 }}><li><a href="#" onClick={() => this.setState({ category: "News" })}>News</a></li></motion.div>
-                <motion.div whileHover={{ scale: 1.3 }} whileTap={{ scale: 0.9 }}><li><a href="#" onClick={() => this.setState({ category: "Show" })}>Show</a></li></motion.div>
+                <motion.div whileHover={{ scale: 1.3 }} whileTap={{ scale: 0.9 }}><li><a href="#" onClick={() => this.setState({ category: 0 })} >Top Favourited</a></li></motion.div>
+                <motion.div whileHover={{ scale: 1.3 }} whileTap={{ scale: 0.9 }}><li><a href="#" onClick={() => this.setState({ category: 1})}>Top Rated</a></li></motion.div>
+                <motion.div whileHover={{ scale: 1.3 }} whileTap={{ scale: 0.9 }}><li><a href="#" onClick={() => this.setState({ category: 2 })}>Top Reviewed</a></li></motion.div>
+              
               </ul>
             </nav>
           </section>
@@ -135,7 +135,7 @@ class Home extends Component {
           <section className="section">
             <ul>
               {
-                this.state.data.map(function (value) {
+                this.state.data[this.state.category].map(function (value) {
                   rank += 1;
                   return (<li key={value.uri}>
                     <Rankcard value={value} rank={rank} fav={inFavList(value.id)} callback={(podcastID) => {toggleFav(podcastID)}} />
