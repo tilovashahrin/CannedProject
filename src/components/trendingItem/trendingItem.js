@@ -1,28 +1,41 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import { Card, Media, Content, Heading, Image, Section, Container } from 'react-bulma-components';
 import "./trendingItem.css"
 import { useHistory } from 'react-router-dom';
+import Loading from '../loading/loading'; 
 import { motion, useAnimation } from 'framer-motion';
 
 function TrendingItem(props) {
   // const { title, image, description, rating, creator } = props
   const { pod, fav, callback } = props
   const history = useHistory();
-
+  console.log(pod); 
   const image = pod.images[0]['url'];
   const title = pod.name;
   const description = pod.description;
   const creator = pod.publisher;
   const podcastID = pod.id;
-  const newepisode = pod.episodes.items[0];
+
   const rating = 4.5; // pod.rating
-
   // console.log(image)
-
+  const [episodes, setEpisodes] = useState([]); 
   const onClickItem = () => {
     history.push({ pathname: '/podcast', state: { podcastID: podcastID } });
   }
+
+
+  const getEpisodes = () => {
+    fetch(`http://localhost:8080/podcasts/${pod.id}/episodes`)
+    .then(response => response.json())
+    .then((data)=>{
+      console.log(data); 
+      setEpisodes(data); 
+    }); 
+  }
+  useEffect(() => {
+    getEpisodes(); 
+  }, []); 
 
   const toggleFav = () => {
     return podcastID
@@ -47,6 +60,8 @@ function TrendingItem(props) {
       )}
     </div>
   }
+  if (episodes.length === 0) 
+    return <Loading/>
 
   return (
     <Card id="cardItem" className="columns container ">
@@ -75,11 +90,11 @@ function TrendingItem(props) {
         </Media>
         <Content className="content">
           <div className="banner-image" onClick={onClickItem}>
-            <img height="50" src={newepisode.images[0].url}></img>
+            <img height="50" src={episodes.items[0].images[0].url}></img>
             <div className="banner-gradient"></div>
             <div className="banner-text">
-              <h2 style={{ color: "white" }} > Episode {pod.episodes.items.length}:  {newepisode.name}</h2>
-              <h3 style={{ color: "white" }}>{newepisode.description.slice(0, 128) + '...'}</h3>
+              <h2 style={{ color: "white" }} > Episode {episodes.length}:  {episodes.items[0].name}</h2>
+              <h3 style={{ color: "white" }}>{episodes.items[0].description.slice(0, 128) + '...'}</h3>
             </div>
           </div>
 

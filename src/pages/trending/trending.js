@@ -38,7 +38,6 @@ class Trending extends Component {
     fetch(`http://localhost:8080/trending`)
     .then(response => response.json())
     .then((data)=>{
-      // console.log(data); 
       this.setState({
         favouritePodList: data.favouritePodList, 
         trendingPodList: data.trendingPodList
@@ -108,16 +107,15 @@ class Trending extends Component {
         </section>)
     }
     else {
-      if (this.state.user == null) {
+      if (this.state.user == null || this.state.trendingPodList.length == 0) {
         return <Loading />
       } else {
         let favs = (this.state.user == null) ? [] : this.state.user.favPodList; 
-        console.log(this.state.trendingPodList);
         return (
           <section className="section">
             <TopicHeader text="Latest episodes from your favourite pods" />
             {this.state.favouritePodList.map((pod) => 
-            <TrendingItem pod={pod} fav={inFavList(pod.id)} callback={(podcastID) => toggleFav(podcastID)} />)}
+            <TrendingItem pod={pod} fav={favs.includes(pod.id)} callback={(podcastID) => toggleFav(podcastID)} />)}
 
             <section className="section">
             </section>
