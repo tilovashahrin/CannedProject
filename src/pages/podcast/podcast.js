@@ -1,5 +1,6 @@
 import React, {Component} from 'react'; 
 import { Media, Button} from 'react-bulma-components';
+import { motion } from "framer-motion";
 import Loading from '../../components/loading/loading'; 
 import BannerImage from '../../components/bannerImage/bannerImage'; 
 import EpisodeTile from '../../components/episodeTile/episodeTile'; 
@@ -108,12 +109,13 @@ class Podcast extends Component{
               <span className="favorite">Favourite</span>
           </div>
         </div> */}
-        <div className='fav-button'>
+        <motion.div whileHover={{ scale: 1.1, x: '-5px' }} whileTap={{ scale: 0.9 }}>
+          <div className='fav-button'>
           {/* {(fav) ? <button className="button is-priority" onClick= {() => callback(toggleFav())}>Add to Favourite</button> : <button className="button is-priority" onClick= {() => callback(toggleFav())}>remove from Favourite</button> } */}
           {(this.state.fav) ? <button className="button" onClick={() => this.toggleFav(this.props.location.state.podcastID)}><img src="./images/icons/filled_heart.svg" /><div>Remove from Fav</div></button> :
                 <button className="button is-danger" onClick={() => this.toggleFav(this.props.location.state.podcastID)}><img src="./images/icons/empty_heart.svg" />Add to Fav</button>
               }
-        </div>
+        </div></motion.div>
 
         <TopicHeader text="Total Score"/>
             <h1 className='total-rating'>{this.state.data.rating} / 5</h1>

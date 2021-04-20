@@ -2,7 +2,7 @@ import 'react-bulma-components/dist/react-bulma-components.min.css';
 import React, { Component } from 'react';
 import TopicHeader from '../../components/topicHeader/topicHeader';
 import Loading from '../../components/loading/loading';
-
+import { motion } from "framer-motion";
 import userData from './tempAccountData.json'
 import podcastData from './tempPodcastData.json';
 import EpisodeTile from '../../components/episodeTile/episodeTile';
@@ -12,7 +12,7 @@ const sessionStatus = true;
 
 class Trending extends Component {
   constructor(props) {
-    super();
+    super(props);
     this.state = { user: null, favouritePodList: [], trendingPodList: [], loginStatus: false };
     this.loadTrendingData = this.loadTrendingData.bind(this);
   }

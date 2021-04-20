@@ -85,12 +85,12 @@ function Rankcard(props) {
               <h2>Rating {rating} / 5</h2>
               {displaystars(rating)}
             </div>
-            <div>
+            <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}><div>
               {/* {(fav) ? <button className="button is-priority" onClick= {() => callback(toggleFav())}>Add to Favourite</button> : <button className="button is-priority" onClick= {() => callback(toggleFav())}>remove from Favourite</button> } */}
               {(fav) ? <button className="button" onClick={() => callback(toggleFav())}><img src="./images/icons/filled_heart.svg" /><div>Remove from Fav</div></button> :
                 <button className="button is-danger " onClick={() => callback(toggleFav())}><img src="./images/icons/empty_heart.svg" />Add to Fav</button>
               }
-            </div>
+            </div></motion.div>
           </Media.Item>
         </Media>
         <Content className="content">

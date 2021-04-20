@@ -1,6 +1,7 @@
 import React, {useState} from 'react'; 
 import './reviewField.css';
 import {Form, Button} from 'react-bulma-components';
+import { motion } from "framer-motion";
 const {Field, Label, Control, Input, Textarea} = Form; 
 
 function ReviewField(props){
@@ -56,7 +57,11 @@ function ReviewField(props){
         <Textarea className="review-body" onChange={(value) => setReview(value.target.value)} value={review} placeholder="Review:"/>
       </Control>
     </Field>
-    {displayStars(score)}
+     <motion.div whileHover={{x: '-30px'}}>
+      <div class="stars">
+        {displayStars(score)}
+      </div>
+    </motion.div>
     <Button onClick={() => callback(getData())}>Share</Button>
   </div>
 }

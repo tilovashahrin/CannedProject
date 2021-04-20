@@ -34,9 +34,9 @@ function ReviewCard(props){
           <Heading size={4}>{review.title}</Heading>
           <Heading subtitle size={6}>{review.author}</Heading>
         </Media.Item>
-        <Media.Item position="right">
+          <Media.Item position="right">
           {displaystars(review.rating)}
-        </Media.Item>
+          </Media.Item>
         <Content className="content">
           {review.content}
         </Content>
