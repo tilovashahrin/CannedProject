@@ -22,17 +22,28 @@ class Home extends Component {
     super();
     this.state = { data: null, category: 'Comedy', user: null };
     // this.state = { category: 'Comedy'}
+    this.loadData = this.loadData.bind(this); 
+  }
+
+  loadData(){
+    fetch(`http://localhost:8080/home`)
+    .then(response => response.json())
+    .then((data)=>{
+      console.log(data); 
+      this.setState({
+        data: data.podcasts,
+      });
+    }); 
+
+    fetch('http://localhost:8080/account/', {credentials: 'include'})
+    .then(response => response.json())
+    .then(data => {
+      this.setState({user: data.data}); 
+    })
   }
 
   componentDidMount() {
-    fetch(`http://localhost:8080/home`)
-      .then(response => response.json())
-      .then((data) => {
-        this.setState({
-          data: data.podcasts,
-          user: data.user
-        });
-      });
+    this.loadData(); 
   }
 
   addFavNotification = (type) => {
@@ -66,7 +77,8 @@ class Home extends Component {
     ]; 
 
     const inFavList = (podcastID) => {
-      this.state.user.favourites.forEach((pod) => {
+      if (this.state.user == null) return false; 
+      this.state.user.favPodList.forEach((pod) => {
         if (pod === podcastID) {
           return true
         }
@@ -75,11 +87,24 @@ class Home extends Component {
     }
 
     const toggleFav = (podcastID) => {
-      if (this.state.user != null) {
-        this.addFavNotification('adding')
+      if (user != null) {
+        // this.addFavNotification('adding');
+        fetch('http://localhost:8080/account/toggleFavourites', {
+          credentials: 'include', 
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          method: 'POST', 
+          body: JSON.stringify({podcastID: podcastID})
+        })
+        .then(response => response.json())
+        .then(data => {
+          this.loadData(); 
+        })
         console.log(`${this.state.user.name} added ${podcastID} podcast to their favpodlist`)
       } else {
-        this.addFavNotification('not loggedin')
+        // this.addFavNotification('not loggedin')
         console.log('please log in to do this!!')
       }
     }
