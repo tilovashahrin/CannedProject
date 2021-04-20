@@ -24,6 +24,7 @@ class Home extends Component {
     this.state = { data: null, category: 0, user: null, reviews: null };
 
     this.loadData = this.loadData.bind(this); 
+    this.addFavNotification = this.addFavNotification.bind(this); 
   }
 
   loadData(){
@@ -40,11 +41,29 @@ class Home extends Component {
     .then(response => response.json())
     .then(data => {
       this.setState({user: data.data}); 
+      console.log(data);
+      // if (data.reqStatus){
+      //   fetch(`http://localhost:8080/podcasts/latestUserReview`, {credentials: 'include'})
+      //   .then(response => response.json())
+      //   .then(review => {
+      //     console.log(review); 
+      //     this.setState({reviews: review}); 
+      //   })
+      // }
     })
   }
 
   componentDidMount() {
     this.loadData(); 
+  }
+  inFavList(podcastID){
+    if (this.state.user == null) return false; 
+    this.state.user.favPodList.forEach((pod) => {
+      if (pod === podcastID) {
+        return true
+      }
+    })
+    return false
   }
 
   addFavNotification = (type) => {
@@ -62,8 +81,6 @@ class Home extends Component {
       }
     };
   };
-
-
   render() {
     const images = [
       './images/99invs.png',
@@ -76,16 +93,6 @@ class Home extends Component {
       './images/adnan_syed.jpg',
       './images/99invs.png',
     ];
-
-    const inFavList = (podcastID) => {
-      if (this.state.user == null) return false; 
-      this.state.user.favourites.forEach((pod) => {
-        if (pod === podcastID) {
-          return true
-        }
-      })
-      return false
-    }
 
     const toggleFav = (podcastID) => {
       if (user != null) {
@@ -118,15 +125,16 @@ class Home extends Component {
     else {
       // need to take a rank-sorted list of podcast 
       let rank = 0;
+      let favs = (this.state.user == null) ? [] : this.state.user.favPodList; 
       return <div className="home-page has-text-left p-0 m-0">
         <ImageCarousel />
 
         <div className="columns ">
           <TopTrendingBlock images={images} />
-          <div className=" has-margin-top-10">
+          <div className=" has-margin-top-10 hide">
             <TopicHeader text='Your Recent Review' />
             <section className="container">
-              {/* {this.state.reviews.map((review) => <ReviewCard review={review}></ReviewCard>)} */}
+              { (this.state.reviews)? this.state.reviews.map((review) => <ReviewCard review={review}></ReviewCard>): <div/>}
             </section>
           </div>
         </div>
@@ -158,7 +166,7 @@ class Home extends Component {
                 this.state.data[this.state.category].map(function (value) {
                   rank += 1;
                   return (<li key={value.uri}>
-                    <Rankcard value={value} rank={rank} fav={inFavList(value.id)} callback={(podcastID) => { toggleFav(podcastID) }} />
+                    <Rankcard value={value} rank={rank} fav={favs.includes(value.id)} callback={(podcastID) => { toggleFav(podcastID) }} />
                     <div className="m-1"></div>
                   </li>
                   )

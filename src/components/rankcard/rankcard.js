@@ -17,6 +17,7 @@ function Rankcard(props) {
   const rating = value.rating; // value.rating
   const ranking = rank;
   const podcastID = value.id;
+  console.log(fav); 
 
   // console.log(image)
 

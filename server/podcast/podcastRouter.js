@@ -20,6 +20,10 @@ router.get('/:id/episodes', function(req, res){
 router.get('/:id/reviews', function(req, res){
   Review.find({podcast: req.params.id}).then((data) => res.send(data)); 
 }); 
+router.get('/latestUserReview', function(req, res){
+  console.log(req.session.userID); 
+  Review.find({userid: req.session.userID}).then((data) => res.send(data)); 
+}); 
 
 router.post('/:id/addReview', function(req, res){
   const content = req.body; 
