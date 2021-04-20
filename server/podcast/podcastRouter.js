@@ -41,11 +41,12 @@ router.get('/:id/reviews', function(req, res){
 
 router.post('/:id/addReview', function(req, res){
   const content = req.body; 
-  if (req.session.userID){
+  console.log(content); 
+  if (req.session.userID && content){
     console.log('has session'); 
     const review = new Review({
       title: content.title, 
-      content: content.content, 
+      content: content.review, 
       podcast: req.params.id, 
       timestamp: Date.now().toString(), 
       rating: content.rating, 

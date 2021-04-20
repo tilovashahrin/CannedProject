@@ -42,11 +42,15 @@ class Podcast extends Component{
   }
 
   onCreateReview(data){
-    console.log(data); 
+    console.log(JSON.stringify(data)); 
     fetch(`http://localhost:8080/podcasts/${this.props.location.state.podcastID}/addReview`, {
       credentials: 'include', 
-      method: 'post',
-      data: data
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
     })
       .then(response => response.json())
       .then((data) => {
