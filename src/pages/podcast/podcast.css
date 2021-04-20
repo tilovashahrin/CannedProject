@@ -24,24 +24,25 @@
   left: 5%;
 }
 
-.insidebtn{
-  border: 5px solid rgb(224, 88, 88);
-  border-radius: 8px;
+button{
+  /* border: 5px solid rgb(224, 88, 88);
+  border-radius: 8px; */
+  background: rgb(224, 88, 88);
   display: flex;
   cursor: pointer;
   padding: 4px;
 }
 
-.insidebtn .favorite{
+.inside-btn{
   /* height: 20px;
   width: 40px; */
-  font-size: 21px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 400;
   font-family: sans-serif;
-  color: rgb(0, 0, 0);
+  color: white;
 }
 
-.insidebtn :hover{
+button:hover{
   transition: 0.5s;
   background: rgb(224, 88, 88);
 }

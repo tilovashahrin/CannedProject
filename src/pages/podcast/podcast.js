@@ -1,4 +1,5 @@
 import React, {Component} from 'react'; 
+import { Media} from 'react-bulma-components';
 import Loading from '../../components/loading/loading'; 
 import BannerImage from '../../components/bannerImage/bannerImage'; 
 import EpisodeTile from '../../components/episodeTile/episodeTile'; 
@@ -11,7 +12,7 @@ import './podcast.css';
 class Podcast extends Component{
   constructor(props){
     super(props); 
-    this.state = {data: null, episodes: null, reviews:null, isLoggedIn: false, fav: false}; 
+    this.state = {data: null, episodes: null, reviews:null, isLoggedIn: false, fav: false, callback}; 
     this.loadData = this.loadData.bind(this); 
   }
   
@@ -107,12 +108,14 @@ class Podcast extends Component{
               <span className="favorite">Favourite</span>
           </div>
         </div> */}
+        <Media.Item>
         <div>
           {/* {(fav) ? <button className="button is-priority" onClick= {() => callback(toggleFav())}>Add to Favourite</button> : <button className="button is-priority" onClick= {() => callback(toggleFav())}>remove from Favourite</button> } */}
           {(this.state.fav) ? <button className="button" onClick={() => this.toggleFav(this.state.podcastID)}><img src="./images/icons/filled_heart.svg" /><div>Remove from Fav</div></button> :
                 <button className="inside-btn" onClick={() => this.toggleFav(this.state.podcastID)}><img src="./images/icons/empty_heart.svg" />Add to Fav</button>
               }
         </div>
+        </Media.Item>
         <TopicHeader text="Latest Episodes"/>
         <div className="episodes">
           <ul>
