@@ -28,7 +28,19 @@ function NavBar(props) {
   const [isActive, setActive] = useState(false); 
 
   var [searchQuery, setSearchQuery] = useState('');
-  var [showLogin, setLogin] = useState(false); 
+  var [showLogin, setLoginPanel] = useState(false); 
+  var [isLoggedIn, setLoginStatus] = useState(false); 
+
+  const checkLoggedIn = () => {
+    fetch('http://localhost:8080/account/', {credentials: 'include'})
+      .then(response => response.json())
+      .then(data => {
+        console.log(data); 
+        setLoginStatus(data.reqStatus); 
+      })
+  }
+  checkLoggedIn(); 
+
 
   useLayoutEffect(() => {
     const checkMobile = () => setMobile(window.innerWidth < 1050); 
@@ -48,6 +60,15 @@ function NavBar(props) {
     }
   }
 
+  const onLogInOut = () => {
+    if (isLoggedIn){
+      fetch('http://localhost:8080/account/signout', {credentials:'include'}); 
+      checkLoggedIn(); 
+    }
+    else setLoginPanel(!showLogin)
+  }
+
+
   const mobileNav = () => {
     return <div>
       <Navbar className="nav">
@@ -66,7 +87,7 @@ function NavBar(props) {
             routes.map((item) => <ul>{navItem(item)}</ul>)
           }
         </li>
-        <Login removePannel={() => setLogin(false)}/>
+        <Login removePannel={() => { setLoginPanel(false); setLoginStatus(checkLoggedIn()); }}/>
       </Box>
       <Input className="search-bar"
         placeholder="search"
@@ -96,12 +117,12 @@ function NavBar(props) {
         value={searchQuery}
         onKeyDown={onEnterSearch}
       ></Input>
-      <Navbar.Item className={showLogin? "is-outlined": ""} randerAs="a" href="#" onClick={() => setLogin(!showLogin)}>
+      <Navbar.Item className={showLogin? "is-outlined": ""} randerAs="a" href="#" onClick={onLogInOut}>
           <Link>
-            Log in / Register
+            {isLoggedIn? 'Log out' : 'Login / Register'}
           </Link>
         </Navbar.Item>
-      {(showLogin)? <Login removePannel={() => setLogin(false)}/>: null}
+      {(showLogin)? <Login removePannel={() =>{ setLoginPanel(false); setLoginStatus(checkLoggedIn()); }}/>: null}
     </Navbar>
   }
 

@@ -8,7 +8,8 @@ mongoose.Promise = global.Promise;
 
 mongoose.connect(uri, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true, 
+    dbName: 'CannedPods'
 }, function (error) {
     if (error) {
         console.error('Unable to connect: ', error)
