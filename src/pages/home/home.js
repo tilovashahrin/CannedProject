@@ -19,9 +19,10 @@ class Home extends Component {
     super();
     this.state = { data: null, category: 'Comedy', user: null };
     // this.state = { category: 'Comedy'}
+    this.loadData = this.loadData.bind(this); 
   }
 
-  componentDidMount() {
+  loadData(){
     fetch(`http://localhost:8080/home`)
     .then(response => response.json())
     .then((data)=>{
@@ -30,6 +31,10 @@ class Home extends Component {
         user: data.user
       });
     }); 
+  }
+
+  componentDidMount() {
+    this.loadData(); 
   }
 
   addFavNotification = (type) => {
@@ -61,10 +66,23 @@ class Home extends Component {
 
     const toggleFav = (podcastID) => {
       if (user != null) {
-        this.addFavNotification('adding')
+        // this.addFavNotification('adding');
+        fetch('http://localhost:8080/account/toggleFavourites', {
+          credentials: 'include', 
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          method: 'POST', 
+          body: JSON.stringify({podcastID: podcastID})
+        })
+        .then(response => response.json())
+        .then(data => {
+          this.loadData(); 
+        })
         console.log(`${this.state.user.name} added ${podcastID} podcast to their favpodlist`)
       } else {
-        this.addFavNotification('not loggedin')
+        // this.addFavNotification('not loggedin')
         console.log('please log in to do this!!')
       }
     }

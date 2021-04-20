@@ -12,9 +12,10 @@ class Podcast extends Component{
   constructor(props){
     super(props); 
     this.state = {data: null, episodes: null, reviews:null, isLoggedIn: false}; 
+    this.loadData = this.loadData.bind(this); 
   }
 
-  componentDidMount(){
+  loadData(){
     if (this.props.location){
       fetch(`http://localhost:8080/podcasts/${this.props.location.state.podcastID}`)
       .then(response => response.json())
@@ -44,8 +45,11 @@ class Podcast extends Component{
         .then(data => {
           this.setState({isLoggedIn: data.reqStatus}); 
         })
-
     }
+  }
+
+  componentDidMount(){
+    this.loadData(); 
   }
 
   onCreateReview(data){
@@ -61,24 +65,34 @@ class Podcast extends Component{
     })
       .then(response => response.json())
       .then((data) => {
-        if (data.reqState){
-          fetch(`http://localhost:8080/podcasts/${this.props.location.state.podcastID}/reviews`)
-            .then(response => response.json())
-            .then((data)=>{
-              console.log(data); 
-              this.setState({
-                reviews: data, 
-              }); 
-            })
-        }
+        this.loadData(); 
       }); 
-  }  
+  }
+  
+  toggleFav(podcastID){
+    if (this.state.isLoggedIn) {
+      // this.addFavNotification('adding');
+      fetch('http://localhost:8080/account/toggleFavourites', {
+        credentials: 'include', 
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        method: 'POST', 
+        body: JSON.stringify({podcastID: podcastID})
+      })
+      .then(response => response.json())
+      .then(data => {
+        this.loadData(); 
+      })
+      console.log(`Added ${podcastID} podcast to their favpodlist`)
+    } else {
+      // this.addFavNotification('not loggedin')
+      console.log('please log in to do this!!')
+    }
+  }
 
   render(){
-    const clicked = (c) => {
-      console.log(c)
-    // alert('Clicked!');
-    }
 
     if (this.state.data == null || this.state.reviews == null || this.state.episodes == null){
       return <Loading/>
@@ -86,7 +100,7 @@ class Podcast extends Component{
     else{
       return <div className="podcast-page">
         <BannerImage image={this.state.data['images'][0]['url']} title={this.state.data.name} description={this.state.data.description}/>
-        <div id = "btn" className="heartbtn" onClick={this.clicked}>
+        <div id = "btn" className="heartbtn" onClick={() => this.toggleFav(this.state.data.id)}>
           <div className="insidebtn">
               <span className="favorite">Favourite</span>
           </div>
