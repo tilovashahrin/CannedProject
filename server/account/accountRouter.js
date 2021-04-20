@@ -99,9 +99,4 @@ router.post('/toggleFavourites', async function(req, res){
 }); 
 
 
-router.get('/test', function(req, res){
-  User.find({}).then((data) => res.send(data)); 
-}); 
-
-
 module.exports = router; 
