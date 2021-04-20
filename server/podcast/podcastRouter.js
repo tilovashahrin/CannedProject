@@ -38,8 +38,36 @@ router.get('/:id/episodes', function(req, res){
 }); 
 
 router.get('/:id/reviews', function(req, res){
-  Review.find({}).then((data) => res.send(data)); 
-})
+  Review.find({podcast: req.params.id}).then((data) => res.send(data)); 
+}); 
+
+router.post('/:id/addReview', function(req, res){
+  const content = req.body; 
+  if (req.session.userID){
+    const review = new Review({
+      title: content.title, 
+      content: content.content, 
+      podcast: req.params.id, 
+      timestamp: Date.now().toString(), 
+      rating: content.rating, 
+      userid: req.session.userID
+    }); 
+
+    review.save((err) => {
+      if (err){
+        console.log('An error occured when trying to write a reivew'); 
+        console.log(err); 
+        res.send({reqStatus: false, errorMessage:'An error occured when trying to write a review.'}); 
+      }
+      else {
+        res.send({reqStatus: true}); 
+      }
+    })
+  }
+  else {
+    res.send({reqStatus: false, errorMessage:'Must be logged in.'})
+  }
+}); 
 
 router.get('/search/:query', function(req, res){
   searchShow(req.params.query).then((data)=>{
