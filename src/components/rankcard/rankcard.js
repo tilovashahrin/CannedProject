@@ -3,6 +3,7 @@ import 'react-bulma-components/dist/react-bulma-components.min.css';
 import { Card, Media, Content, Heading, Image, Section, Container } from 'react-bulma-components';
 import "./rankcard.css"
 import { useHistory } from 'react-router-dom';
+import {motion} from 'framer-motion'; 
 import { Callbacks } from "jquery";
 
 function Rankcard(props) {
@@ -59,6 +60,7 @@ function Rankcard(props) {
   }
 
   return (
+    <motion.div style={{padding: '1rem'}} initial={{x : 1000}} animate={{x: 0}} transition={{ease: 'easeOut', duration: rank*1}}>
     <Card id="cardItem" className="columns container ">
 
       <Card.Content className="column is-2 " id="rank">
@@ -101,6 +103,7 @@ function Rankcard(props) {
       </Card.Content>
 
     </Card>
+    </motion.div>
   );
 }
 
