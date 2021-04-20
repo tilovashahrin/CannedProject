@@ -2,9 +2,6 @@ const express = require('express');
 const router = express.Router(); 
 const {User} = require('../models/user_model'); 
 
-//temporary files
-const accountData = require('../tempData/tempAccountData.json'); 
-
 router.get('/', async function(req, res){
   if (req.session.userID){
     const document = await User.findById(req.session.userID); 
@@ -67,6 +64,33 @@ router.post('/signin', async function(req, res){
 router.get('/signout', function(req, res){
   req.session.userID = null; 
   res.send({reqStatus: true}); 
+}); 
+
+router.post('/toggleFavourites', async function(req, res){
+  let userID = req.session.userID; 
+  if (userID){
+    const account = await User.findById(userID); 
+    if (account.favPodList.includes(req.body.podcastID)){
+      account.favPodList = account.favPodList.filter((item) => item !== req.body.podcastID); 
+    }
+    else{
+      account.favPodList.push(req.body.podcastID); 
+    }
+
+    account.save((err) => {
+      if (err){
+        console.log('An error occured when adding to favourites'); 
+        console.log(err); 
+        res.send({reqStatus: false, errorMessage: 'An error occured when adding to favourites'}); 
+      }
+      else {
+        res.send({reqStatus: true}); 
+      }
+    }); 
+  }
+  else{
+    res.send({reqStatus: false, errorMessage: 'Must be Logged in.'})
+  }
 }); 
 
 
