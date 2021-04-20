@@ -1,12 +1,7 @@
 .banner-image{
-  opacity: 0.5;
   position: relative;
 }
 
-.banner-image:hover{
-  transition: opacity 1s;
-  opacity: 1;
-}
 .banner-image img{
   width: 100%; 
   height: 40vh; 
