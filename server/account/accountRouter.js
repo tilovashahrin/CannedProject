@@ -1,43 +1,6 @@
 const express = require('express'); 
 const router = express.Router(); 
-<<<<<<< HEAD
-const cookieParser = require('cookie-parser'); 
-var session = require('express-session'); 
-
-var app = express(); 
-=======
 const {User} = require('../models/user_model'); 
->>>>>>> 21328343f33fbda7a8dedc5171cd5dca24d21e44
-
-//temporary files
-const accountData = require('../models/user_model.js'); 
-
-//middlware
-app.use(express.static('public')); 
-app.use(cookieParser()); 
-
-
-app.post('/addToFavorites', function(req, res) {
-  let userID = req.session.userID; 
-  if(userID){
-    accountData.findOneAndUpdate(
-      {"id": userID}, 
-      { $push: {"favPodList": req.body.podID}}, 
-      function(error, success) {
-        if (error) {
-          console.log(error);
-        }
-        else {
-        console.log(success);
-        }
-      }
-    );
-  }
-  else{
-    res.send("Please login to add this podcast to your favourites!"); 
-  }
-});
-
 
 router.get('/', async function(req, res){
   if (req.session.userID){
@@ -101,6 +64,33 @@ router.post('/signin', async function(req, res){
 router.get('/signout', function(req, res){
   req.session.userID = null; 
   res.send({reqStatus: true}); 
+}); 
+
+router.post('/toggleFavourites', async function(req, res){
+  let userID = req.session.userID; 
+  if (userID){
+    const account = await User.findById(userID); 
+    if (account.favPodList.includes(req.body.podcastID)){
+      account.favPodList = account.favPodList.filter((item) => item !== req.body.podcastID); 
+    }
+    else{
+      account.favPodList.push(req.body.podcastID); 
+    }
+
+    account.save((err) => {
+      if (err){
+        console.log('An error occured when adding to favourites'); 
+        console.log(err); 
+        res.send({reqStatus: false, errorMessage: 'An error occured when adding to favourites'}); 
+      }
+      else {
+        res.send({reqStatus: true}); 
+      }
+    }); 
+  }
+  else{
+    res.send({reqStatus: false, errorMessage: 'Must be Logged in.'})
+  }
 }); 
 
 
