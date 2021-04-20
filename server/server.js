@@ -15,12 +15,10 @@ const client = new MongoClient(uri);
 
 const { getTopPodcasts } = require('./podcast/podcastProcessing');
 
+const {topRated, topReviewed, topFav} = getTopPodcasts();
+
 // const {Review} = require('../models/review_model'); 
 // const {User} = require('../models/user_model'); 
-
-// const review_model = require('./model/review_model.js') // import from local machine
-// const user_model = require('./model/user_model.js') // import from local machine
-
 
 async function test(client) {
 
@@ -45,14 +43,6 @@ async function test(client) {
 
 }
 
-async function listDatabases(client) {
-  const databasesList = await client.db().admin().listDatabases();
-
-  console.log("Databases: ");
-  databasesList.databases.forEach(db => console.log(` - ${db.name}`))
-}
-
-// main().catch(console.error);
 test(client).catch(console.error);
 
 // async function test(client) {
@@ -82,6 +72,7 @@ const userData = require('./tempData/tempAccountData.json');
 const reviewData = require('./tempData/tempReviewData.json')
 const loggedin = true; // check if user is loggedin
 
+
 let app = express();
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -96,13 +87,17 @@ app.use(session({
   secret: 'some secret'
 }));
 
+
 app.get('/home', function (req, res) {
-  const reviews = reviewData.items
-  if (reviewData.items.length > 4) {
-    reviews = reviewData.items.slice(0, 4)
-  }
-  console.log(reviews)
-  res.send({ "podcasts": tempTrendingData, "user": userData, "review": reviews });
+  // getTopPodcasts().then(data => {
+    console.log('here at /home')
+    console.log(topReviewed)
+    const reviews = reviewData.items;
+    if (reviewData.items.length > 4) {
+      reviews = reviewData.items.slice(0, 4)
+    }
+    res.send({ "podcasts": topRated, "user": userData, "review": reviews });
+  // }).catch(e => {e})
 });
 
 app.use('/podcasts', podcastRoute);
