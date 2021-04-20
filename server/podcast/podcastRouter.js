@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router(); 
 const {Review} = require('../models/review_model'); 
 const {getShow, getEpisodes, searchShow} = require('./spotifyWrapper'); 
+const {getPodcastReviewData} = require('./podcastProcessing'); 
 
 router.post('/addToFavorites', function(req, res) {
   let userID = req.session.userID; 
@@ -26,7 +27,9 @@ router.post('/addToFavorites', function(req, res) {
 
 router.get('/:id', function(req, res){
   getShow(req.params.id).then((data)=>{
-    res.send(data.data); 
+    getPodcastReviewData(req.params.id).then((reviewData) => {
+      res.send({...data.data.shows[0], ...reviewData } ); 
+    })
   }); 
 }); 
 router.get('/:id/episodes', function(req, res){

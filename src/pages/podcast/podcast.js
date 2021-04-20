@@ -20,8 +20,9 @@ class Podcast extends Component{
       fetch(`http://localhost:8080/podcasts/${this.props.location.state.podcastID}`)
       .then(response => response.json())
       .then((data)=>{
+        console.log(data); 
         this.setState({
-          data: data.shows[0], 
+          data: data, 
         }); 
       })
       fetch(`http://localhost:8080/podcasts/${this.props.location.state.podcastID}/episodes`)
