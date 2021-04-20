@@ -19,7 +19,7 @@
   display: block; 
 }
 
-.heartbtn{
+.heartbtn, button{
   position: absolute;
   left: 5%;
 }

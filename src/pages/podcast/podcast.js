@@ -11,9 +11,10 @@ import './podcast.css';
 class Podcast extends Component{
   constructor(props){
     super(props); 
-    this.state = {data: null, episodes: null, reviews:null, isLoggedIn: false}; 
+    this.state = {data: null, episodes: null, reviews:null, isLoggedIn: false, fav: false}; 
     this.loadData = this.loadData.bind(this); 
   }
+  
 
   loadData(){
     if (this.props.location){
@@ -101,10 +102,16 @@ class Podcast extends Component{
     else{
       return <div className="podcast-page">
         <BannerImage image={this.state.data['images'][0]['url']} title={this.state.data.name} description={this.state.data.description}/>
-        <div id = "btn" className="heartbtn" onClick={() => this.toggleFav(this.state.data.id)}>
+        {/* <div id = "btn" className="heartbtn" onClick={() => this.toggleFav(this.state.data.id)}><img src="./images/icons/filled_heart.svg" />
           <div className="insidebtn">
               <span className="favorite">Favourite</span>
           </div>
+        </div> */}
+        <div>
+          {/* {(fav) ? <button className="button is-priority" onClick= {() => callback(toggleFav())}>Add to Favourite</button> : <button className="button is-priority" onClick= {() => callback(toggleFav())}>remove from Favourite</button> } */}
+          {(this.state.fav) ? <button className="button" onClick={() => this.toggleFav(this.state.podcastID)}><img src="./images/icons/filled_heart.svg" /><div>Remove from Fav</div></button> :
+                <button className="inside-btn" onClick={() => this.toggleFav(this.state.podcastID)}><img src="./images/icons/empty_heart.svg" />Add to Fav</button>
+              }
         </div>
         <TopicHeader text="Latest Episodes"/>
         <div className="episodes">
