@@ -8,74 +8,16 @@ const { v4: uuidv4 } = require('uuid');
 let podcastRoute = require('./podcast/podcastRouter');
 let accountRoute = require('./account/accountRouter');
 
-<<<<<<< HEAD
-const { MongoClient } = require('mongodb');
-const secrets = require('./secrets.json');
-const uri = `mongodb+srv://${secrets.mongodb.username}:${secrets.mongodb.password}@cluster0.1hv4s.mongodb.net/CannedPods?retryWrites=true&w=majority`
-const client = new MongoClient(uri);
-
 const { getTopPodcasts } = require('./podcast/podcastProcessing');
 
 const {topRated, topReviewed, topFav} = getTopPodcasts();
 
-// const {Review} = require('../models/review_model'); 
-// const {User} = require('../models/user_model'); 
-
-async function test(client) {
-
-  try {
-
-    await client.connect();
-    // await listDatabases(client);
-    const database = client.db('CannedPods');
-    const reviews = database.collection('review');
-
-    const query = { id: '1' }
-
-    const review = await reviews.findOne(query);
-
-    console.log(review)
-
-  } catch (e) {
-    console.error(e)
-  } finally {
-    await client.close()
-  }
-
-}
-
-test(client).catch(console.error);
-
-// async function test(client) {
-// }
-
-// test(client);
-
-// app.get('/', function (request, response) {
-//   // let podID = request.query.podcastID;
-//   // model.Review.find({ podcast: podID }).then(function (reviewlist) {
-//   //   response.send('review', {
-//   //     review: reviewlist
-//   //   })
-//   // })
-
-//     model.Review.find().then(function (reviewlist) {
-//     response.send('review', {
-//       review: reviewlist
-//     })
-//   })
-
-// });
-
-=======
->>>>>>> main
 //temp data
 const tempTrendingData = require('./tempData/tempTrending.json');
 const userData = require('./tempData/tempAccountData.json');
 const reviewData = require('./tempData/tempReviewData.json')
 const loggedin = true; // check if user is loggedin
 
-const {getTopPodcasts} = require('./podcast/podcastProcessing'); 
 
 let app = express(); 
 app.use(express.urlencoded({extended: false}));
@@ -91,17 +33,16 @@ app.use(session({
   secret: 'some secret'
 }));
 
-
 app.get('/home', function (req, res) {
-  // getTopPodcasts().then(data => {
+  getTopPodcasts().then(data => {
     console.log('here at /home')
-    console.log(topReviewed)
+    console.log(data.topRated)
     const reviews = reviewData.items;
     if (reviewData.items.length > 4) {
       reviews = reviewData.items.slice(0, 4)
     }
-    res.send({ "podcasts": topRated, "user": userData, "review": reviews });
-  // }).catch(e => {e})
+    res.send({ "podcasts": data.topRated, "user": userData, "review": reviews });
+  }).catch(e => {e})
 });
 
 app.use('/podcasts', podcastRoute);
