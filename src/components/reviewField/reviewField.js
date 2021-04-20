@@ -40,7 +40,8 @@ function ReviewField(props){
     return {
       title: title, 
       review: review, 
-      rating: score
+      rating: score, 
+      author: author
     }
   }
 

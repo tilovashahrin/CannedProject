@@ -11,7 +11,7 @@ mongoose.connect(uri, {
     if (error) {
         console.error('Unable to connect: ', error)
     } else {
-        console.log('Connected to MongoDB')
+        console.log('Connected Podcast to MongoDB')
     }
 })
 

@@ -11,7 +11,7 @@ import './podcast.css';
 class Podcast extends Component{
   constructor(props){
     super(props); 
-    this.state = {data: null, episodes: null, reviews:null}; 
+    this.state = {data: null, episodes: null, reviews:null, isLoggedIn: false}; 
   }
 
   componentDidMount(){
@@ -37,12 +37,41 @@ class Podcast extends Component{
         this.setState({
           reviews: data, 
         }); 
-      })
+      });
+
+      fetch('http://localhost:8080/account/', {credentials: 'include'})
+        .then(response => response.json())
+        .then(data => {
+          this.setState({isLoggedIn: data.reqStatus}); 
+        })
+
     }
   }
 
   onCreateReview(data){
-    console.log(data); 
+    console.log(JSON.stringify(data)); 
+    fetch(`http://localhost:8080/podcasts/${this.props.location.state.podcastID}/addReview`, {
+      credentials: 'include', 
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+      .then(response => response.json())
+      .then((data) => {
+        if (data.reqState){
+          fetch(`http://localhost:8080/podcasts/${this.props.location.state.podcastID}/reviews`)
+            .then(response => response.json())
+            .then((data)=>{
+              console.log(data); 
+              this.setState({
+                reviews: data, 
+              }); 
+            })
+        }
+      }); 
   }  
 
   render(){
@@ -76,7 +105,7 @@ class Podcast extends Component{
 
         <TopicHeader text="Reviews"/>
         <div className="reviews">
-          <ReviewField author="user" callback={(data) => this.onCreateReview(data)}/>
+          { (this.state.isLoggedIn) ? <ReviewField callback={(data) => this.onCreateReview(data)}/> : <div/>}
           <ul>
             {
               (this.state.reviews.length === 0) ? <div/> : this.state.reviews.map((item) => 

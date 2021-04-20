@@ -6,6 +6,7 @@ import './reviewCard.css';
 function ReviewCard(props){
 
   const {review} = props; 
+  console.log(review); 
 
   return <div className="review-card">
     <Card>
