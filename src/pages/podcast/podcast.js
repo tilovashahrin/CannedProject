@@ -1,4 +1,5 @@
 import React, {Component} from 'react'; 
+import { Media, Button} from 'react-bulma-components';
 import Loading from '../../components/loading/loading'; 
 import BannerImage from '../../components/bannerImage/bannerImage'; 
 import EpisodeTile from '../../components/episodeTile/episodeTile'; 
@@ -45,7 +46,7 @@ class Podcast extends Component{
       fetch('http://localhost:8080/account/', {credentials: 'include'})
         .then(response => response.json())
         .then(data => {
-          this.setState({isLoggedIn: data.reqStatus}); 
+          this.setState({isLoggedIn: data.reqStatus, fav: data.data.favPodList.includes(this.props.location.state.podcastID)}); 
         })
     }
   }
@@ -107,12 +108,13 @@ class Podcast extends Component{
               <span className="favorite">Favourite</span>
           </div>
         </div> */}
-        <div>
+        <div className='fav-button'>
           {/* {(fav) ? <button className="button is-priority" onClick= {() => callback(toggleFav())}>Add to Favourite</button> : <button className="button is-priority" onClick= {() => callback(toggleFav())}>remove from Favourite</button> } */}
-          {(this.state.fav) ? <button className="button" onClick={() => this.toggleFav(this.state.podcastID)}><img src="./images/icons/filled_heart.svg" /><div>Remove from Fav</div></button> :
-                <button className="inside-btn" onClick={() => this.toggleFav(this.state.podcastID)}><img src="./images/icons/empty_heart.svg" />Add to Fav</button>
+          {(this.state.fav) ? <button className="button" onClick={() => this.toggleFav(this.props.location.state.podcastID)}><img src="./images/icons/filled_heart.svg" /><div>Remove from Fav</div></button> :
+                <button className="button is-danger" onClick={() => this.toggleFav(this.props.location.state.podcastID)}><img src="./images/icons/empty_heart.svg" />Add to Fav</button>
               }
         </div>
+
         <TopicHeader text="Total Score"/>
             <h1 className='total-rating'>{this.state.data.rating} / 5</h1>
         <TopicHeader text="Latest Episodes"/>
