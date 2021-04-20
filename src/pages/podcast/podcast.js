@@ -66,9 +66,9 @@ class Podcast extends Component{
         <div className="episodes">
           <ul>
             {
-              this.state.episodes.items.slice(0,4).map((value) => <li key={value.uri}>
+              this.state.episodes.items.slice(0,4).map((value => <li key={value.uri}>
                   <EpisodeTile episode={value}/>
-                </li>)
+                </li>))
             }
           </ul>
         </div>
