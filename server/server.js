@@ -13,6 +13,8 @@ const secrets = require('./secrets.json');
 const uri = `mongodb+srv://${secrets.mongodb.username}:${secrets.mongodb.password}@cluster0.1hv4s.mongodb.net/CannedPods?retryWrites=true&w=majority`
 const client = new MongoClient(uri);
 
+const {getTopPodcasts} = require('./podcast/podcastProcessing'); 
+
 // const {Review} = require('../models/review_model'); 
 // const {User} = require('../models/user_model'); 
 
@@ -97,7 +99,9 @@ app.use('/podcasts', podcastRoute);
 app.use('/account', accountRoute);
 
 app.get('/home', function(req, res){
-  res.send({"podcasts": tempTrendingData, "user": userData}); 
+  getTopPodcasts().then(data => {
+    res.send({"podcasts": tempTrendingData}); 
+  }); 
   
 }); 
 

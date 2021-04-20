@@ -15,13 +15,12 @@ mongoose.connect(uri, {
     }
 })
 
-mongoose.set('useCreateIndex', true)
 
 let Schema = mongoose.Schema; 
 
 let podcastSchema = new Schema(
     {
-      'podcastID': String, 
+      _id: String, 
       'reviewCount': Number,
       'rating': Number, 
       'favourites': Number

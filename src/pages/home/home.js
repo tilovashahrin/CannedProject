@@ -26,11 +26,17 @@ class Home extends Component {
     fetch(`http://localhost:8080/home`)
     .then(response => response.json())
     .then((data)=>{
+      console.log(data); 
       this.setState({
         data: data.podcasts,
-        user: data.user
       });
     }); 
+
+    fetch('http://localhost:8080/account/', {credentials: 'include'})
+    .then(response => response.json())
+    .then(data => {
+      this.setState({user: data.data}); 
+    })
   }
 
   componentDidMount() {
@@ -56,7 +62,8 @@ class Home extends Component {
   
   render() {
     const inFavList = (podcastID) => {
-      this.state.user.favourites.forEach((pod) => {
+      if (this.state.user == null) return false; 
+      this.state.user.favPodList.forEach((pod) => {
         if (pod === podcastID) {
           return true
         }

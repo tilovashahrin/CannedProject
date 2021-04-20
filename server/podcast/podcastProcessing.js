@@ -18,20 +18,20 @@ async function getPodcastReviewData(podcastID){
     rating: totalRatings/reviews.length, 
     distribution: distribution
   }; 
-  updatePodcastReview(podcastID, data); 
+  updatePodcastReview(podcastID, {rating: data.rating, totalRatings: reviews.length}); 
   return data; 
 }
 
 async function updatePodcastReview(podcastID, data){
-  const podcasts = await Podcast.find({podcastID: podcastID}); 
-  if (podcasts.length > 0){
-    let podcast = podcasts[0]; 
+  let podcast = await Podcast.findById(podcastID); 
+  if (podcast){
     podcast.rating = data.rating; 
     podcast.reviewCount = data.totalRatings; 
     podcast.save(); 
   }
   else {
     const pod = new Podcast({
+      _id: podcastID,
       rating: data.rating, 
       reviewCount: data.totalRatings, 
       favourites: 0
@@ -41,23 +41,36 @@ async function updatePodcastReview(podcastID, data){
 }
 
 async function updatePodcastFavourites(podcastID, favourites){
-  const podcasts = await Podcast.find({podcastID: podcastID}); 
-  if (podcasts.length > 0){
-    let podcast = podcasts[0]; 
+  let podcast = await Podcast.findById(podcastID); 
+  if (podcast){
     podcast.favourites += favourites; 
     podcast.save(); 
   }
   else {
     const pod = new Podcast({
+      _id: podcastID,
       rating: 0, 
-      reviewCount: [0,0,0,0,0], 
+      reviewCount: 0, 
       favourites: favourites
     }); 
     pod.save(); 
   }
 }
 
+async function getTopPodcasts(){
+  
+  const mostReviewed = await Podcast.find().sort({reviewCount: -1}).limit(5); 
+  const mostFavourited = await Podcast.find().sort({favourites: -1}).limit(5); 
+  const topRated = await Podcast.find().sort({rating: -1}).limit(5); 
+  return {
+    topReviewed: mostReviewed, 
+    topFav: mostFavourited, 
+    topRated: topRated
+  }; 
+}
+
 module.exports = {
   getPodcastReviewData: getPodcastReviewData, 
-  updatePodcastFavourites: updatePodcastFavourites
+  updatePodcastFavourites: updatePodcastFavourites, 
+  getTopPodcasts: getTopPodcasts
 }
