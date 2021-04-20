@@ -12,7 +12,9 @@ class SignUp extends Component{
       username: '',
       email: '', 
       password: '', 
-      verifyPassword: ''
+      verifyPassword: '',
+      successful: false, 
+      errorMessage: ''
     };
     this.onSubmission = this.onSubmission.bind(this);  
   }
@@ -75,7 +77,32 @@ class SignUp extends Component{
     }
 
     if (success){
-      // send info to the backend
+      console.log(JSON.stringify({
+        name: this.state.username, 
+        email: this.state.email,
+        password: this.state.password,
+      }));
+      fetch('http://localhost:8080/account/signup', {
+        method: 'POST', 
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: this.state.username, 
+          email: this.state.email,
+          password: this.state.password,
+        }) 
+      })
+      .then(response => response.json())
+      .then((data) => {
+        if (data.creationStatus){
+          this.setState({successful: true, errorMessage:''}); 
+        }
+        else {
+          this.setState({errorMessage: data.errorMessage}); 
+        }
+      }); 
     }
 
   }
@@ -138,6 +165,7 @@ class SignUp extends Component{
           <Button onClick={this.onSubmission}>
             Sign Up!
           </Button>
+          <p id="verify-help" className="help is-danger">{this.state.errorMessage}</p>
         </Field>
       </div>
     </div>
