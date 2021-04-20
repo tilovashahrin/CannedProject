@@ -21,13 +21,13 @@
   margin: auto;
 }
 
-.acc{
+.acc, .friends{
   padding-bottom: 2rem;
   text-align: left;
   padding-left: 5%;
 } 
 
-#account-name, #account-email, #account-id{
+#account-name, #account-email, #account-id, #subscribers, #following{
   font-size: 30px;
 }
 

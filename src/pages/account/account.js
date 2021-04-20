@@ -47,6 +47,11 @@ class Account extends Component{
         <h1 id="account-email">Email: {this.state.data.email}</h1>
         <h1 id="account-id">ID: {this.state.data.id}</h1>
       </div>
+      <TopicHeader text="Friends"></TopicHeader>
+      <div class="friends">
+        <h1 id="subscribers">Subscribers: {this.state.data.subscribers}</h1>
+        <h1 id="following">Following: {this.state.data.following}</h1>
+      </div>
       <TopicHeader text="Favourite Podcasts"/>
       {this.state.data.favourites.map((id) => <PodcastListItem podcastID={id}/>)}
       <TopicHeader text="Ratings over the Year"/>
