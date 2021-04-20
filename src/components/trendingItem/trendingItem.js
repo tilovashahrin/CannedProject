@@ -10,7 +10,7 @@ function TrendingItem(props) {
   // const { title, image, description, rating, creator } = props
   const { pod, fav, callback } = props
   const history = useHistory();
-  console.log(pod); 
+  // console.log(pod); 
   const image = pod.images[0]['url'];
   const title = pod.name;
   const description = pod.description;
@@ -29,7 +29,7 @@ function TrendingItem(props) {
     fetch(`http://localhost:8080/podcasts/${pod.id}/episodes`)
     .then(response => response.json())
     .then((data)=>{
-      console.log(data); 
+      // console.log(data); 
       setEpisodes(data); 
     }); 
   }
