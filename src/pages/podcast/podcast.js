@@ -43,6 +43,24 @@ class Podcast extends Component{
 
   onCreateReview(data){
     console.log(data); 
+    fetch(`http://localhost:8080/podcasts/${this.props.location.state.podcastID}/addReview`, {
+      credentials: 'include', 
+      method: 'post',
+      data: data
+    })
+      .then(response => response.json())
+      .then((data) => {
+        if (data.reqState){
+          fetch(`http://localhost:8080/podcasts/${this.props.location.state.podcastID}/reviews`)
+            .then(response => response.json())
+            .then((data)=>{
+              console.log(data); 
+              this.setState({
+                reviews: data, 
+              }); 
+            })
+        }
+      }); 
   }  
 
   render(){
@@ -76,7 +94,7 @@ class Podcast extends Component{
 
         <TopicHeader text="Reviews"/>
         <div className="reviews">
-          <ReviewField author="user" callback={(data) => this.onCreateReview(data)}/>
+          <ReviewField callback={(data) => this.onCreateReview(data)}/>
           <ul>
             {
               (this.state.reviews.length === 0) ? <div/> : this.state.reviews.map((item) => 

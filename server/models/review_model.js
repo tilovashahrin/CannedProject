@@ -6,7 +6,11 @@ const uri = `mongodb+srv://${secrets.mongodb.username}:${secrets.mongodb.passwor
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(uri, function (error) {
+mongoose.connect(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true, 
+  dbName: 'CannedPods'
+}, function (error) {
     if (error) {
         console.error('Unable to connect: ', error)
     } else {
