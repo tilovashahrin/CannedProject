@@ -16,3 +16,10 @@
 .login-card p{
   padding: 1rem 0 ;
 }
+
+@media screen and (max-width: 600px){
+  .login-card{
+    position: relative;
+    text-align: left;
+  }
+}
