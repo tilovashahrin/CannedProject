@@ -113,6 +113,8 @@ class Podcast extends Component{
                 <button className="inside-btn" onClick={() => this.toggleFav(this.state.podcastID)}><img src="./images/icons/empty_heart.svg" />Add to Fav</button>
               }
         </div>
+        <TopicHeader text="Total Score"/>
+            <h1 className='total-rating'>{this.state.data.rating} / 5</h1>
         <TopicHeader text="Latest Episodes"/>
         <div className="episodes">
           <ul>

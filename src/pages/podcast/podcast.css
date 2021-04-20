@@ -18,6 +18,11 @@
   clear: left; 
   display: block; 
 }
+.total-rating{
+  font-size: 40pt;
+  font-weight: bold;
+  text-decoration: underline;
+}
 
 .heartbtn, button{
   position: absolute;
