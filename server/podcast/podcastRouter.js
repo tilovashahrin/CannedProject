@@ -3,8 +3,6 @@ const router = express.Router();
 const {Review} = require('../models/review_model'); 
 const {getShow, getEpisodes, searchShow} = require('./spotifyWrapper'); 
 
-
-
 router.post('/addToFavorites', function(req, res) {
   let userID = req.session.userID; 
   if(userID){
