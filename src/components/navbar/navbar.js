@@ -88,7 +88,11 @@ function NavBar(props) {
             routes.map((item) => <ul>{navItem(item)}</ul>)
           }
         </li>
-        <Login removePannel={() => { setLoginPanel(false); setLoginStatus(checkLoggedIn()); }}/>
+        {isLoggedIn?     <Navbar.Item className={showLogin? "is-outlined": ""} randerAs="a" href="#" onClick={onLogInOut}>
+          <Link>
+            {isLoggedIn? 'Log out' : 'Login / Register'}
+          </Link>
+        </Navbar.Item>: <Login removePannel={() => { setLoginPanel(false); setLoginStatus(checkLoggedIn()); }}/>}
       </Box>
       <Input className="search-bar"
         placeholder="search"
