@@ -47,28 +47,19 @@ class Home extends Component {
       }
     };
   };
-
   
   
   render() {
+    const inFavList = (podcastID) => {
+      this.state.user.favourites.forEach((pod) => {
+        if (pod === podcastID) {
+          return true
+        }
+      })
+      return false
+    }
 
-    // const addFavNotification = (type) => {
-    //   return () => {
-    //     switch (type) {
-    //       case 'already added':
-    //         NotificationManager.info('This is already in your fav list!');
-    //         break;
-    //       case 'adding':
-    //         NotificationManager.success('Added to your favourite list', 'Title here');
-    //         break;
-    //       case 'not loggedin':
-    //         NotificationManager.warning('Please log in to add podcast', 'Close after 3000ms', 3000);
-    //         break;
-    //     }
-    //   };
-    // };
-
-    const onAddToFav = (podcastID) => {
+    const toggleFav = (podcastID) => {
       if (user != null) {
         this.addFavNotification('adding')
         console.log(`${this.state.user.name} added ${podcastID} podcast to their favpodlist`)
@@ -120,10 +111,9 @@ class Home extends Component {
             <ul>
               {
                 this.state.data.map(function (value) {
-                  console.log(user)
                   rank += 1;
                   return (<li key={value.uri}>
-                    <Rankcard value={value} rank={rank} user={user} callback={(podcastID) => {onAddToFav(podcastID)}} />
+                    <Rankcard value={value} rank={rank} fav={inFavList(value.id)} callback={(podcastID) => {toggleFav(podcastID)}} />
                     <div className="m-1"></div>
                   </li>
                   )
