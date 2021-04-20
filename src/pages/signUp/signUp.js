@@ -96,7 +96,7 @@ class SignUp extends Component{
       })
       .then(response => response.json())
       .then((data) => {
-        if (data.creationStatus){
+        if (data.reqStatus){
           this.setState({successful: true, errorMessage:''}); 
         }
         else {

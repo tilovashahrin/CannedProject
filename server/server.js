@@ -1,5 +1,6 @@
 const express = require('express'); 
 const session = require('express-session'); 
+var cookieParser = require('cookie-parser');
 const cors = require('cors'); 
 const {v4: uuidv4} = require('uuid'); 
 
@@ -54,14 +55,14 @@ const tempTrendingData = require('./tempData/tempTrending.json');
 let app = express(); 
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
-app.use(cors()); 
+app.use(cors({origin: 'http://localhost:3000', credentials: true})); 
 
-
+app.use(cookieParser());
 app.use(session({
   genid: () => uuidv4(), 
-  resave: false, 
-  saveUninitialized: false, 
-  cookie: {secure: true},
+  resave: true,
+  saveUninitialized: true,
+  cookie: {secure: false},
   secret: 'some secret'
 })); 
 
