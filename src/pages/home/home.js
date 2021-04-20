@@ -23,9 +23,10 @@ class Home extends Component {
     super();
     this.state = { data: null, category: 'Comedy', user: null, reviews:null };
     // this.state = { category: 'Comedy'}
+    this.loadData = this.loadData.bind(this); 
   }
 
-  componentDidMount() {
+  loadData(){
     fetch(`http://localhost:8080/home`)
       .then(response => response.json())
       .then((data) => {
@@ -34,7 +35,18 @@ class Home extends Component {
           user: data.user, 
           reviews: data.review
         });
-      });
+
+    }); 
+
+    fetch('http://localhost:8080/account/', {credentials: 'include'})
+    .then(response => response.json())
+    .then(data => {
+      this.setState({user: data.data}); 
+    })
+  }
+
+  componentDidMount() {
+    this.loadData(); 
   }
 
   addFavNotification = (type) => {
@@ -68,6 +80,7 @@ class Home extends Component {
     ];
 
     const inFavList = (podcastID) => {
+      if (this.state.user == null) return false; 
       this.state.user.favourites.forEach((pod) => {
         if (pod === podcastID) {
           return true
@@ -77,11 +90,24 @@ class Home extends Component {
     }
 
     const toggleFav = (podcastID) => {
-      if (this.state.user != null) {
-        this.addFavNotification('adding')
+      if (user != null) {
+        // this.addFavNotification('adding');
+        fetch('http://localhost:8080/account/toggleFavourites', {
+          credentials: 'include', 
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          method: 'POST', 
+          body: JSON.stringify({podcastID: podcastID})
+        })
+        .then(response => response.json())
+        .then(data => {
+          this.loadData(); 
+        })
         console.log(`${this.state.user.name} added ${podcastID} podcast to their favpodlist`)
       } else {
-        this.addFavNotification('not loggedin')
+        // this.addFavNotification('not loggedin')
         console.log('please log in to do this!!')
       }
     }
