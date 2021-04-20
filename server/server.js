@@ -1,14 +1,16 @@
 const express = require('express'); 
 const session = require('express-session'); 
+var cookieParser = require('cookie-parser');
 const cors = require('cors'); 
 const {v4: uuidv4} = require('uuid'); 
+
 
 let podcastRoute = require('./podcast/podcastRouter'); 
 let accountRoute = require('./account/accountRouter'); 
 
 const { MongoClient } = require('mongodb');
 const secrets = require('./secrets.json'); 
-const uri = `mongodb+srv://${secrets.mongodb.username}:${secrets.mongodb.password}@cluster0.1hv4s.mongodb.net/cannedpods?retryWrites=true&w=majority`
+const uri = 'mongodb+srv://${secrets.mongodb.username}:${secrets.mongodb.password}@cluster0.1hv4s.mongodb.net/CannedPods?retryWrites=true&w=majority'
 const client = new MongoClient(uri);
 
 // const {Review} = require('../models/review_model'); 
@@ -78,20 +80,29 @@ const userData = require('./tempData/tempAccountData.json');
 const loggedin = true; // check if user is loggedin
 
 let app = express(); 
-app.use(cors()); 
-app.use('/podcasts', podcastRoute);
-app.use('/account', accountRoute);  
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
+app.use(cors({origin: 'http://localhost:3000', credentials: true})); 
 
+app.use(cookieParser());
 app.use(session({
   genid: () => uuidv4(), 
-  resave: false, 
-  saveUninitialized: false, 
-  cookie: {secure: true},
+  resave: true,
+  saveUninitialized: true,
+  cookie: {secure: false},
   secret: 'some secret'
 })); 
 
+<<<<<<< HEAD
 app.get('/home', function(req, res){
   res.send({"podcasts": tempTrendingData, "user": userData}); 
+=======
+app.use('/podcasts', podcastRoute);
+app.use('/account', accountRoute);  
+
+app.get('/trending', function(req, res){
+  res.send(tempTrendingData); 
+>>>>>>> main
 }); 
 
 app.get('/trending', function(req, res){

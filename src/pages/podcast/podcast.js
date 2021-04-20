@@ -79,7 +79,7 @@ class Podcast extends Component{
           <ReviewField author="user" callback={(data) => this.onCreateReview(data)}/>
           <ul>
             {
-              (this.state.reviews.length === 0) ? <div/> : this.state.reviews.items.map((item) => 
+              (this.state.reviews.length === 0) ? <div/> : this.state.reviews.map((item) => 
                 <li>
                   <ReviewCard review={item}/>
                 </li>
