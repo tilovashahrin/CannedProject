@@ -5,11 +5,14 @@ import React, { Component, useState } from 'react';
 import { motion } from "framer-motion";
 import Loading from '../../components/loading/loading';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
+import 'bulma-spacing'
 import Rankcard from '../../components/rankcard/rankcard';
 import TopicHeader from '../../components/topicHeader/topicHeader';
 import ImageCarousel from '../../components/imageCarousel/imageCarousel';
+import TopTrendingBlock from '../../components/topTrendingBlock/topTrendingBlock'
+import TopTrendingTile from '../../components/topTrendingTile/topTrendingTile'
 import 'react-notifications/lib/notifications.css';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import './home.css';
 
 // const NotificationManager = window.ReactNotifications.NotificationManager;
@@ -23,13 +26,13 @@ class Home extends Component {
 
   componentDidMount() {
     fetch(`http://localhost:8080/home`)
-    .then(response => response.json())
-    .then((data)=>{
-      this.setState({
-        data: data.podcasts,
-        user: data.user
+      .then(response => response.json())
+      .then((data) => {
+        this.setState({
+          data: data.podcasts,
+          user: data.user
+        });
       });
-    }); 
   }
 
   addFavNotification = (type) => {
@@ -47,9 +50,21 @@ class Home extends Component {
       }
     };
   };
-  
-  
+
+
   render() {
+    const images = [
+      './images/99invs.png', 
+      './images/steve.jpg', 
+      './images/adnan_syed.jpg',
+      './images/steve.jpg', 
+      './images/99invs.png', 
+      './images/adnan_syed.jpg',
+      './images/steve.jpg', 
+      './images/adnan_syed.jpg',
+      './images/99invs.png',
+    ]; 
+
     const inFavList = (podcastID) => {
       this.state.user.favourites.forEach((pod) => {
         if (pod === podcastID) {
@@ -60,7 +75,7 @@ class Home extends Component {
     }
 
     const toggleFav = (podcastID) => {
-      if (user != null) {
+      if (this.state.user != null) {
         this.addFavNotification('adding')
         console.log(`${this.state.user.name} added ${podcastID} podcast to their favpodlist`)
       } else {
@@ -81,9 +96,13 @@ class Home extends Component {
         <ImageCarousel />
 
 
-        <div>
-        <TopicHeader text='Top Trending:' />
-          <TopicHeader text='Your Recent Reviews: ' />
+        <div className="columns ">
+          <TopTrendingBlock images={images}/>
+          <div className="columns is-half has-margin-top-20">
+            <TopicHeader text='Your Recent Review' />
+            <section className="container">
+            </section>
+          </div>
         </div>
 
         {/* <Ranking category={'Comedy'} data={this.state.data}/> */}
@@ -113,7 +132,7 @@ class Home extends Component {
                 this.state.data.map(function (value) {
                   rank += 1;
                   return (<li key={value.uri}>
-                    <Rankcard value={value} rank={rank} fav={inFavList(value.id)} callback={(podcastID) => {toggleFav(podcastID)}} />
+                    <Rankcard value={value} rank={rank} fav={inFavList(value.id)} callback={(podcastID) => { toggleFav(podcastID) }} />
                     <div className="m-1"></div>
                   </li>
                   )
