@@ -8,12 +8,16 @@ import 'react-bulma-components/dist/react-bulma-components.min.css';
 import Rankcard from '../../components/rankcard/rankcard';
 import TopicHeader from '../../components/topicHeader/topicHeader';
 import ImageCarousel from '../../components/imageCarousel/imageCarousel';
+import 'react-notifications/lib/notifications.css';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 import './home.css';
+
+// const NotificationManager = window.ReactNotifications.NotificationManager;
 
 class Home extends Component {
   constructor(props) {
     super();
-    this.state = { data: null, category: 'Comedy' };
+    this.state = { data: null, category: 'Comedy', user: null };
     // this.state = { category: 'Comedy'}
   }
 
@@ -22,15 +26,60 @@ class Home extends Component {
     .then(response => response.json())
     .then((data)=>{
       this.setState({
-        data: data,
+        data: data.podcasts,
+        user: data.user
       });
     }); 
   }
 
+  addFavNotification = (type) => {
+    return () => {
+      switch (type) {
+        case 'already added':
+          NotificationManager.info('This is already in your fav list!');
+          break;
+        case 'adding':
+          NotificationManager.success('Added to your favourite list', 'Title here');
+          break;
+        case 'not loggedin':
+          NotificationManager.warning('Please log in to add podcast', 'Close after 3000ms', 3000);
+          break;
+      }
+    };
+  };
+
+  
+  
   render() {
+
+    // const addFavNotification = (type) => {
+    //   return () => {
+    //     switch (type) {
+    //       case 'already added':
+    //         NotificationManager.info('This is already in your fav list!');
+    //         break;
+    //       case 'adding':
+    //         NotificationManager.success('Added to your favourite list', 'Title here');
+    //         break;
+    //       case 'not loggedin':
+    //         NotificationManager.warning('Please log in to add podcast', 'Close after 3000ms', 3000);
+    //         break;
+    //     }
+    //   };
+    // };
+
+    const onAddToFav = (podcastID) => {
+      if (user != null) {
+        this.addFavNotification('adding')
+        console.log(`${this.state.user.name} added ${podcastID} podcast to their favpodlist`)
+      } else {
+        this.addFavNotification('not loggedin')
+        console.log('please log in to do this!!')
+      }
+    }
     // const [category, setCategory] = useState('Comedy');
 
-
+    const user = this.state.user;
     if (this.state.data == null) {
       return <Loading />
     }
@@ -71,9 +120,10 @@ class Home extends Component {
             <ul>
               {
                 this.state.data.map(function (value) {
+                  console.log(user)
                   rank += 1;
                   return (<li key={value.uri}>
-                    <Rankcard value={value} rank={rank} />
+                    <Rankcard value={value} rank={rank} user={user} callback={(podcastID) => {onAddToFav(podcastID)}} />
                     <div className="m-1"></div>
                   </li>
                   )

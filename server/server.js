@@ -91,7 +91,7 @@ app.use(session({
 })); 
 
 app.get('/home', function(req, res){
-  res.send(tempTrendingData); 
+  res.send({"podcasts": tempTrendingData, "user": userData}); 
 }); 
 
 app.get('/trending', function(req, res){
