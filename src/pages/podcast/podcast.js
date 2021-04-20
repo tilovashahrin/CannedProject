@@ -11,7 +11,7 @@ import './podcast.css';
 class Podcast extends Component{
   constructor(props){
     super(props); 
-    this.state = {data: null, episodes: null, reviews:null}; 
+    this.state = {data: null, episodes: null, reviews:null, isLoggedIn: false}; 
   }
 
   componentDidMount(){
@@ -37,7 +37,14 @@ class Podcast extends Component{
         this.setState({
           reviews: data, 
         }); 
-      })
+      });
+
+      fetch('http://localhost:8080/account/', {credentials: 'include'})
+        .then(response => response.json())
+        .then(data => {
+          this.setState({isLoggedIn: data.reqStatus}); 
+        })
+
     }
   }
 
@@ -98,7 +105,7 @@ class Podcast extends Component{
 
         <TopicHeader text="Reviews"/>
         <div className="reviews">
-          <ReviewField callback={(data) => this.onCreateReview(data)}/>
+          { (this.state.isLoggedIn) ? <ReviewField callback={(data) => this.onCreateReview(data)}/> : <div/>}
           <ul>
             {
               (this.state.reviews.length === 0) ? <div/> : this.state.reviews.map((item) => 

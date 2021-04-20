@@ -63,7 +63,8 @@ function NavBar(props) {
   const onLogInOut = () => {
     if (isLoggedIn){
       fetch('http://localhost:8080/account/signout', {credentials:'include'}); 
-      checkLoggedIn(); 
+      checkLoggedIn();
+      history.push('/');  
     }
     else setLoginPanel(!showLogin)
   }
