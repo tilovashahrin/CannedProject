@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router(); 
 const {User} = require('../models/user_model'); 
 const {updatePodcastFavourites} = require('../podcast/podcastProcessing'); 
+const {getFavPodList} = require('./accountProcessing');
+
 
 router.get('/', async function(req, res){
   if (req.session.userID){
@@ -12,7 +14,7 @@ router.get('/', async function(req, res){
       favPodList: document.favPodList, 
       reviewHistory: [0,0,0,0,0,0,0,0,0,0,0,0]
     }; 
-    res.send({reqStatus: true, data: data}); 
+    res.send({reqStatus: true, data: data, favPodList:  getFavPodList(document.id)}); 
   }
   else {
     res.send({reqStatus: false, errorMessage:'Must be logged in.'})

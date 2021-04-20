@@ -16,7 +16,6 @@ const {topRated, topReviewed, topFav} = getTopPodcasts();
 const tempTrendingData = require('./tempData/tempTrending.json');
 const userData = require('./tempData/tempAccountData.json');
 const reviewData = require('./tempData/tempReviewData.json')
-const loggedin = true; // check if user is loggedin
 
 
 let app = express(); 
@@ -41,19 +40,25 @@ app.get('/home', function (req, res) {
     if (reviewData.items.length > 4) {
       reviews = reviewData.items.slice(0, 4)
     }
-    res.send({ "podcasts": data.topRated, "user": userData, "review": reviews });
+    res.send({ "podcasts": data, "user": userData, "review": reviews });
+  }).catch(e => {e})
+});
+
+app.get('/trending', function (req, res) {
+  getTopPodcasts().then(data => {
+    console.log('here at /trending')
+    console.log(data.topRated)
+    const reviews = reviewData.items;
+    if (reviewData.items.length > 4) {
+      reviews = reviewData.items.slice(0, 4)
+    }
+    res.send({ "favouritePodList": data.topRated, "trendingPodList": data.topReviewed });
   }).catch(e => {e})
 });
 
 app.use('/podcasts', podcastRoute);
 app.use('/account', accountRoute);
 
-// app.get('/home', function(req, res){
-//   getTopPodcasts().then(data => {
-//     res.send({"podcasts": data}); 
-//   }); 
-  
-// }); 
 
 app.get('/api', (req, res) => res.send(app.routes));
 
