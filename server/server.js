@@ -8,7 +8,7 @@ let accountRoute = require('./account/accountRouter');
 
 const { MongoClient } = require('mongodb');
 const secrets = require('./secrets.json'); 
-const uri = `mongodb+srv://${secrets.mongodb.username}:${secrets.mongodb.password}@cluster0.1hv4s.mongodb.net/cannedpods?retryWrites=true&w=majority`
+const uri = 'mongodb+srv://${secrets.mongodb.username}:${secrets.mongodb.password}@cluster0.1hv4s.mongodb.net/CannedPods?retryWrites=true&w=majority'
 const client = new MongoClient(uri);
 
 
