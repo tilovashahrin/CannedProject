@@ -1,15 +1,13 @@
-  
-const mongoose = require('mongoose');
+const {MongoClient} = require('mongodb');
 
-const secrets = require('../secrets.json'); 
-const uri = `mongodb+srv://${secrets.mongodb.username}:${secrets.mongodb.password}@cluster0.1hv4s.mongodb.net/CannedPods?retryWrites=true&w=majority`
+const uri = 'mongodb+srv://sunny:NpeyKCnXQtW3S1wU@cluster0.1hv4s.mongodb.net/cannedpods?retryWrites=true&w=majority'
+const client = new MongoClient(uri);
 
 mongoose.Promise = global.Promise;
 
 mongoose.connect(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true, 
-  dbName: 'CannedPods'
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 }, function (error) {
     if (error) {
         console.error('Unable to connect: ', error)
@@ -27,7 +25,7 @@ let reviewSchema = new Schema({
     "content": String,
     "podcast": String,
     "timestamp": String, 
-    "rating": Number,
+    "rating": Integer,
     "userid": String
 }, {
     collection: "review"

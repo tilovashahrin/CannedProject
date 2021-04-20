@@ -13,6 +13,11 @@ const secrets = require('./secrets.json');
 const uri = 'mongodb+srv://${secrets.mongodb.username}:${secrets.mongodb.password}@cluster0.1hv4s.mongodb.net/CannedPods?retryWrites=true&w=majority'
 const client = new MongoClient(uri);
 
+// const {Review} = require('../models/review_model'); 
+// const {User} = require('../models/user_model'); 
+
+// const review_model = require('./model/review_model.js') // import from local machine
+// const user_model = require('./model/user_model.js') // import from local machine
 
 
 async function test(client) {
@@ -48,9 +53,31 @@ async function listDatabases(client) {
 // main().catch(console.error);
 test(client).catch(console.error);
 
+// async function test(client) {
+// }
+
+// test(client);
+
+// app.get('/', function (request, response) {
+//   // let podID = request.query.podcastID;
+//   // model.Review.find({ podcast: podID }).then(function (reviewlist) {
+//   //   response.send('review', {
+//   //     review: reviewlist
+//   //   })
+//   // })
+
+//     model.Review.find().then(function (reviewlist) {
+//     response.send('review', {
+//       review: reviewlist
+//     })
+//   })
+
+// });
 
 //temp data
 const tempTrendingData = require('./tempData/tempTrending.json'); 
+const userData = require('./tempData/tempAccountData.json');
+const loggedin = true; // check if user is loggedin
 
 let app = express(); 
 app.use(express.urlencoded({extended: false}));
@@ -66,11 +93,16 @@ app.use(session({
   secret: 'some secret'
 })); 
 
+app.get('/home', function(req, res){
+  res.send({"podcasts": tempTrendingData, "user": userData}); 
+
 app.use('/podcasts', podcastRoute);
 app.use('/account', accountRoute);  
+}); 
 
 app.get('/trending', function(req, res){
-  res.send(tempTrendingData); 
+  
+  res.send({ "user": userData, "favouritePodList": tempTrendingData, "trendingPodList": tempTrendingData, "loginStatus": loggedin }); 
 }); 
 app.get('/api', (req, res) => res.send(app.routes)); 
 

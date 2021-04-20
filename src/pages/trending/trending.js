@@ -13,36 +13,46 @@ const sessionStatus = true;
 class Trending extends Component {
   constructor(props) {
     super();
-    this.state = { user: null, podcasts: [], loginStatus: false };
+    this.state = { user: null, favouritePodList: [], trendingPodList: [], loginStatus: false };
   }
 
   componentDidMount() {
     // console.log(podcastData)
-    this.setState({
-      user: userData,
-      podcasts: podcastData,
-      loginStatus: sessionStatus,
+
+    fetch('http://localhost:8080/trending/')
+    .then(response => response.json())
+    .then((data) => {
+      console.log(data.loggedin)
+      this.setState({
+        user: data.user, 
+        favouritePodList: data.favouritePodList,
+        trendingPodList: data.trendingPodList,
+        loginStatus: data.loginStatus
+      }); 
     })
   }
 
   render() {
 
     // filter out the fav podcasts
-    const displayFavEpisodes = () => {
-      var favpodlist = [];
-      // var podcastlist = this.state.podcasts;
-      // console.log(podcastlist)
-      // this.state.user.favourites.map(function (favsID, index) {
-      //   for (let i = 0; i < podcastlist.length; i++) {
-      //     var pod = podcastlist[i];
-      //     if (pod.id === favsID) {
-      //       favpodlist.push(pod.episodes.items[0])
-      //     }
-      //   }
-      // })
-      favpodlist = this.state.podcasts;
 
-      return favpodlist.map((pod, index) => <TrendingItem pod={pod} />)
+    const inFavList = (podcastID) => {
+      this.state.user.favourites.forEach((pod) => {
+        if (pod === podcastID) {
+          return true
+        }
+      })
+      return false
+    }
+
+    const toggleFav = (podcastID) => {
+      if (this.state.user != null) {
+        this.addFavNotification('adding')
+        console.log(`${this.state.user.name} added ${podcastID} podcast to their favpodlist`)
+      } else {
+        this.addFavNotification('not loggedin')
+        console.log('please log in to do this!!')
+      }
     }
 
     if (!this.state.loginStatus) {
@@ -58,13 +68,15 @@ class Trending extends Component {
         return (
           <section className="section">
             <TopicHeader text="Latest episodes from your favourite pods" />
-            {displayFavEpisodes()}
+            {this.state.favouritePodList.map((pod, index) => 
+            <TrendingItem pod={pod} fav={inFavList(pod.id)} callback={(podcastID) => toggleFav(podcastID)} />)}
 
             <section className="section">
             </section>
 
             <TopicHeader text="Canned Pods Recommandation" />
-            {displayFavEpisodes()}
+            {this.state.trendingPodList.map((pod, index) => 
+            <TrendingItem pod={pod} fav={inFavList(pod.id)} callback={(podcastID) => toggleFav(podcastID)} />)}
           </section>
         )
       }

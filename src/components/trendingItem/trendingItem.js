@@ -3,25 +3,29 @@ import 'react-bulma-components/dist/react-bulma-components.min.css';
 import { Card, Media, Content, Heading, Image, Section, Container } from 'react-bulma-components';
 import "./trendingItem.css"
 import { useHistory } from 'react-router-dom';
-import {motion, useAnimation} from 'framer-motion'; 
+import { motion, useAnimation } from 'framer-motion';
 
 function TrendingItem(props) {
   // const { title, image, description, rating, creator } = props
-  const { pod } = props
+  const { pod, fav, callback } = props
   const history = useHistory();
 
   const image = pod.images[0]['url'];
   const title = pod.name;
   const description = pod.description;
   const creator = pod.publisher;
-  const id = pod.id;
+  const podcastID = pod.id;
   const newepisode = pod.episodes.items[0];
   const rating = 4.5; // pod.rating
 
   // console.log(image)
 
   const onClickItem = () => {
-    history.push({ pathname: '/podcast', state: { podcastID: id } });
+    history.push({ pathname: '/podcast', state: { podcastID: podcastID } });
+  }
+
+  const toggleFav = () => {
+    return podcastID
   }
 
   const displaystars = (rating) => {
@@ -63,6 +67,10 @@ function TrendingItem(props) {
               <h2>Rating {rating} / 5</h2>
               {displaystars(rating)}
             </div>
+            {(fav) ? <button className="button" onClick={() => callback(toggleFav())}><img src="./images/icons/filled_heart.svg" /><div>Remove from Fav</div></button> :
+              <button className="button is-danger " onClick={() => callback(toggleFav())}><img src="./images/icons/empty_heart.svg" />Add to Fav</button>
+            }
+
           </Media.Item>
         </Media>
         <Content className="content">
