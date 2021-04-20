@@ -5,11 +5,15 @@ import React, { Component, useState } from 'react';
 import { motion } from "framer-motion";
 import Loading from '../../components/loading/loading';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
+import 'bulma-spacing'
 import Rankcard from '../../components/rankcard/rankcard';
 import TopicHeader from '../../components/topicHeader/topicHeader';
 import ImageCarousel from '../../components/imageCarousel/imageCarousel';
+import TopTrendingBlock from '../../components/topTrendingBlock/topTrendingBlock'
+import ReviewCard from '../../components/reviewCard/reviewCard'
+import TopTrendingTile from '../../components/topTrendingTile/topTrendingTile'
 import 'react-notifications/lib/notifications.css';
-import {NotificationContainer, NotificationManager} from 'react-notifications';
+import { NotificationContainer, NotificationManager } from 'react-notifications';
 import './home.css';
 
 // const NotificationManager = window.ReactNotifications.NotificationManager;
@@ -17,8 +21,8 @@ import './home.css';
 class Home extends Component {
   constructor(props) {
     super();
-    this.state = { data: null, category: 0, user: null };
-    // this.state = { category: 'Comedy'}
+    this.state = { data: null, category: 0, user: null, reviews: null };
+
     this.loadData = this.loadData.bind(this); 
   }
 
@@ -58,12 +62,24 @@ class Home extends Component {
       }
     };
   };
-  
-  
+
+
   render() {
+    const images = [
+      './images/99invs.png',
+      './images/steve.jpg',
+      './images/adnan_syed.jpg',
+      './images/steve.jpg',
+      './images/99invs.png',
+      './images/adnan_syed.jpg',
+      './images/steve.jpg',
+      './images/adnan_syed.jpg',
+      './images/99invs.png',
+    ];
+
     const inFavList = (podcastID) => {
       if (this.state.user == null) return false; 
-      this.state.user.favPodList.forEach((pod) => {
+      this.state.user.favourites.forEach((pod) => {
         if (pod === podcastID) {
           return true
         }
@@ -105,10 +121,14 @@ class Home extends Component {
       return <div className="home-page has-text-left p-0 m-0">
         <ImageCarousel />
 
-
-        <div>
-        <TopicHeader text='Top Trending:' />
-          <TopicHeader text='Your Recent Reviews: ' />
+        <div className="columns ">
+          <TopTrendingBlock images={images} />
+          <div className=" has-margin-top-10">
+            <TopicHeader text='Your Recent Review' />
+            <section className="container">
+              {/* {this.state.reviews.map((review) => <ReviewCard review={review}></ReviewCard>)} */}
+            </section>
+          </div>
         </div>
 
         {/* <Ranking category={'Comedy'} data={this.state.data}/> */}
@@ -138,7 +158,7 @@ class Home extends Component {
                 this.state.data[this.state.category].map(function (value) {
                   rank += 1;
                   return (<li key={value.uri}>
-                    <Rankcard value={value} rank={rank} fav={inFavList(value.id)} callback={(podcastID) => {toggleFav(podcastID)}} />
+                    <Rankcard value={value} rank={rank} fav={inFavList(value.id)} callback={(podcastID) => { toggleFav(podcastID) }} />
                     <div className="m-1"></div>
                   </li>
                   )
