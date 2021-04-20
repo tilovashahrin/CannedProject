@@ -11,6 +11,9 @@ const secrets = require('./secrets.json');
 const uri = `mongodb+srv://${secrets.mongodb.username}:${secrets.mongodb.password}@cluster0.1hv4s.mongodb.net/cannedpods?retryWrites=true&w=majority`
 const client = new MongoClient(uri);
 
+// const {Review} = require('../models/review_model'); 
+// const {User} = require('../models/user_model'); 
+
 // const review_model = require('./model/review_model.js') // import from local machine
 // const user_model = require('./model/user_model.js') // import from local machine
 

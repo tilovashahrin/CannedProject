@@ -68,6 +68,9 @@ function Rankcard(props) {
                             <h2>Rating {rating} / 5</h2>
                             {displaystars(rating)}
                         </div>
+                        <div>
+                          <button className="button is-alert">Add to Favourite</button>
+                        </div>
                     </Media.Item>
                 </Media>
                 <Content className="content">
