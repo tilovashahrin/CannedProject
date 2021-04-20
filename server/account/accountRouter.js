@@ -1,6 +1,7 @@
 const express = require('express'); 
 const router = express.Router(); 
 const {User} = require('../models/user_model'); 
+const {updatePodcastFavourites} = require('../podcast/podcastProcessing'); 
 
 router.get('/', async function(req, res){
   if (req.session.userID){
@@ -72,9 +73,11 @@ router.post('/toggleFavourites', async function(req, res){
     const account = await User.findById(userID); 
     if (account.favPodList.includes(req.body.podcastID)){
       account.favPodList = account.favPodList.filter((item) => item !== req.body.podcastID); 
+      updatePodcastFavourites(req.body.podcastID, -1)
     }
     else{
       account.favPodList.push(req.body.podcastID); 
+      updatePodcastFavourites(req.body.podcastID, 1)
     }
 
     account.save((err) => {

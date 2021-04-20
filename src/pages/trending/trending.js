@@ -14,11 +14,11 @@ class Trending extends Component {
   constructor(props) {
     super();
     this.state = { user: null, favouritePodList: [], trendingPodList: [], loginStatus: false };
+    this.loadTrendingData = this.loadTrendingData.bind(this); 
   }
 
-  componentDidMount() {
-    // console.log(podcastData)
 
+  loadTrendingData(){
     fetch('http://localhost:8080/trending/')
     .then(response => response.json())
     .then((data) => {
@@ -30,6 +30,10 @@ class Trending extends Component {
         loginStatus: data.loginStatus
       }); 
     })
+  }
+  componentDidMount() {
+    // console.log(podcastData)
+    this.loadTrendingData(); 
   }
 
   render() {
@@ -47,10 +51,23 @@ class Trending extends Component {
 
     const toggleFav = (podcastID) => {
       if (this.state.user != null) {
-        this.addFavNotification('adding')
+        // this.addFavNotification('adding')
+        fetch('http://localhost:8080/account/toggleFavourites', {
+          credentials: 'include', 
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          method: 'POST', 
+          body: JSON.stringify({podcastID: podcastID})
+        })
+        .then(response => response.json())
+        .then(data => {
+          this.loadTrendingData(); 
+        })
         console.log(`${this.state.user.name} added ${podcastID} podcast to their favpodlist`)
       } else {
-        this.addFavNotification('not loggedin')
+        // this.addFavNotification('not loggedin')
         console.log('please log in to do this!!')
       }
     }
