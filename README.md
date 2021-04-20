@@ -10,9 +10,15 @@ Before you submit your project, modify the following table to include everyone's
 | Kashif Hussain             | KashifIV           |
 | Pulkit Madan               | PulkitMadan        |
 | Yiqing Cao                 | Sunnyc317 |
+
+
 ​
 _**Note:** You can delete the unused rows from the table._
 ​
+
+## Link to Independant Study
+https://docs.google.com/presentation/d/1yxPW4x8Fq5zhkn26kV6CI4accEoO7q1Wi2sQmbuF9U4/edit?usp=sharing
+
 ## Overview
 This group project is designed for you to demonstrate the skills that you have learned in this course.  The final project that you submit in the last week of classes will be a completed web application.  Non-functional requirements, especially those associated with production-readiness, will be considered extremely important when marking this project.  You are expected to work in a group of 3-5 when completing this project.  Students will be prohibited from working alone on the project, as this eliminates one of the learning objectives of this assessment.  
 ​
