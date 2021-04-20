@@ -18,11 +18,22 @@ class Trending extends Component {
 
   componentDidMount() {
     // console.log(podcastData)
-    this.setState({
-      user: userData,
-      podcasts: podcastData,
-      loginStatus: sessionStatus,
+
+    fetch('http://localhost:8080/trending/')
+    .then(response => response.json())
+    .then((data) => {
+      this.setState({
+        user: data.user, 
+        podcasts: data.podcasts,
+        loginStatus: data.loggedin
+      }); 
     })
+
+    // this.setState({
+    //   user: userData,
+    //   podcasts: podcastData,
+    //   loginStatus: sessionStatus,
+    // })
   }
 
   render() {

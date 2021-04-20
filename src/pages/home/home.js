@@ -18,7 +18,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:8080/trending`)
+    fetch(`http://localhost:8080/home`)
     .then(response => response.json())
     .then((data)=>{
       this.setState({

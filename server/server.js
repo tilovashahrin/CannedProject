@@ -71,6 +71,8 @@ test(client).catch(console.error);
 
 //temp data
 const tempTrendingData = require('./tempData/tempTrending.json'); 
+const userData = require('./tempData/tempAccountData.json');
+const loggedin = true; // check if user is loggedin
 
 let app = express(); 
 app.use(cors()); 
@@ -85,8 +87,12 @@ app.use(session({
   secret: 'some secret'
 })); 
 
-app.get('/trending', function(req, res){
+app.get('/home', function(req, res){
   res.send(tempTrendingData); 
+}); 
+
+app.get('/trending', function(req, res){
+  res.send({"podcasts": tempTrendingData, "user": userData, "loggedin": loggedin}); 
 }); 
 app.get('/api', (req, res) => res.send(app.routes)); 
 
